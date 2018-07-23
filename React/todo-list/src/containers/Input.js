@@ -13,13 +13,18 @@ class Input extends React.Component {
   }
 
   handleAdd () {
-    console.log('点击了')
-    console.log(this.props.dispatch(addTodo(this.state.text)))
+    if (this.state.text === '') {
+      return
+    }
+    this.setState({
+      text: ''
+    })
+    this.props.dispatch(addTodo(this.state.text))
   }
 
   handleChange (e) {
     let target = e.target
-    console.log('target', target)
+    // console.log('target', target)
     this.setState({
       text: target.value
     })

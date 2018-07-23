@@ -5,12 +5,12 @@ class TodoList extends React.Component {
   render () {
     // console.log('tis.', this.props.todos)
     let todoList = this.props.todos.map(item => {
+      // console.log('item', item)
       return (
         <TodoItem
-          id={item.id}
-          text={item.text}
           key={item.id}
           onItemClick={this.props.onItemClick}
+          {...item}
         >
           {todoList}
         </TodoItem>
