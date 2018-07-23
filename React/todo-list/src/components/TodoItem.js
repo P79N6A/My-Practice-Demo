@@ -3,7 +3,7 @@ import React from 'react'
 class TodoItem extends React.Component {
   render () {
     return (
-      <li>{this.props.text}</li>
+      <li onClick={() => this.props.onItemClick(this.props.id)}>{this.props.text}</li>
     )
   }
 }

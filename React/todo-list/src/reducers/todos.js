@@ -1,4 +1,4 @@
-import { ADD_TODO } from "../actions/actionTypes";
+import { ADD_TODO, TOGGLE_TODO } from "../actions/actionTypes";
 
 let todoId = 0
 
@@ -13,6 +13,16 @@ export const todo = (state = [], action) => {
           completed: false
         }
       ]
+    case TOGGLE_TODO:
+      return state.map(item => {
+        console.log('id', action.id)
+        if (item.id === action.id) {
+          return Object.assign({}, item, {
+            completed: !item.completed
+          })
+        }
+        return item
+      })
     default:
       return state
   }

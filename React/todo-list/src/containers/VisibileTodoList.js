@@ -2,6 +2,7 @@
 import { connect } from 'react-redux'
 import TodoList from '../components/TodoList';
 import { SET_VISIBILE } from '../actions/actionTypes'
+import { toggleTodo } from '../actions/todos'
 
 const filterTodo = (todos, visibile) => {
   console.log('visible', visibile)
@@ -27,15 +28,19 @@ const mapStateToProps = state => {
   }
 }
 
-const mapActionToProps = state => {
+const mapDispatchToProps = dispatch => {
   return {
-    onClick: () => {console.log('test')}
+    onClick: () => {console.log('test')},
+    onItemClick: (id) => {
+      console.log('iiid', id)
+      dispatch(toggleTodo(id))
+    }
   }
 }
 
 const VisibleTodoList = connect(
   mapStateToProps,
-  mapActionToProps
+  mapDispatchToProps
 )(TodoList)
 
 export default VisibleTodoList

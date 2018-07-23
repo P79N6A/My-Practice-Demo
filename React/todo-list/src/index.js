@@ -7,7 +7,7 @@ import rootReducer from './reducers'
 
 const store = createStore(rootReducer)
 
-const unsubscribe = store.subscribe(() => {
+store.subscribe(() => {
   console.log(store.getState())
 })
 
