@@ -4,6 +4,7 @@ import TodoList from '../components/TodoList';
 import { SET_VISIBILE } from '../actions/actionTypes'
 
 const filterTodo = (todos, visibile) => {
+  console.log('visible', visibile)
   switch (visibile) {
     case SET_VISIBILE.SHOW_ALL:
       return todos

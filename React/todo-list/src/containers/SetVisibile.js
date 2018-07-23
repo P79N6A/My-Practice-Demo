@@ -1,16 +1,20 @@
 import { connect } from 'react-redux'
+import Footer from '../components/Footer'
+import { getVisbile } from '../actions/filterVisibile'
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
   return state
 }
 
-const mapActionToProps = state => {
+const mapActionToProps = (dispatch, ownProps) => {
   return {
-    onClick: (filter) => state.dispatch()
+    onClick: (filter) => dispatch(getVisbile(filter))
   }
 }
 
-const FooterLink = connect(
+const FooterButton = connect(
   mapStateToProps,
   mapActionToProps
-)()
+)(Footer)
+
+export default FooterButton
