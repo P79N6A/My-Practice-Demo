@@ -27,12 +27,6 @@ let _axios = (options) => {
     ...options
   })
   return resultPromise
-  // let resuiltPromise = axios({
-  //   method: 'POST',
-  //   ...options,
-  //   url: baseUrl + options.url
-  // })
-  // return resuiltPromise
 }
 
 export default _axios

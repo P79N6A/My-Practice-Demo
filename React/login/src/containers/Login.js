@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Tabs, Form, Icon, Input } from 'antd'
+import { Button, Tabs, Form, Icon, Input, Message } from 'antd'
 import './login.css'
 import _axios from '../utils/axios.js'
 import api from '../api/index'
@@ -76,6 +76,15 @@ class RegisterForm extends React.Component {
           method: 'post',
           data: values
         })
+        .then(res => {
+          if (res.data.success) {
+            // 注册成功
+            Message.success('注册成功')
+          } else {
+            // 注册失败
+            Message.error('用户名已存在')
+          }
+        })
       }
     })
   }
@@ -113,12 +122,25 @@ class RegisterForm extends React.Component {
 const WrappedRegisterForm = Form.create()(RegisterForm)
 
 class Login extends React.Component {
+  constructor (props) {
+    super(props)
+    this.handleChange = this.handleChange.bind(this)
+    this.toggleTab = this.toggleTab.bind(this)
+    this.state = {
+      activeKey: 'login'
+    }
+  }
   handleChange (activeKey) {
-    console.log(activeKey)
+    this.toggleTab()
+  }
+  toggleTab () {
+    this.setState({
+      activeKey: this.state.activeKey === 'login' ? 'register' : 'login'
+    })
   }
   render () {
     return (
-      <Tabs defaultActiveKey="login" onChange={this.handleChange} className="tab-content">
+      <Tabs activeKey={this.state.activeKey} onChange={this.handleChange} className="tab-content">
         <TabPane tab="登录" key="login">
           <WrappedLoginForm />
         </TabPane>

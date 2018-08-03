@@ -5,7 +5,8 @@ const userCode = require('../codes/user')
 module.exports = {
   // 登录
   async login (ctx) {
-    console.log(ctx);
+    let user = util.getBodyData(ctx)
+    let result = await userService.login(user)
     ctx.body = {
       success: true,
       data: {
@@ -28,7 +29,7 @@ module.exports = {
       }
     } else {
       ctx.body = {
-        success: true,
+        success: false,
         message: userCode.FAIL_USERNAME_EXIST
       }
     }
