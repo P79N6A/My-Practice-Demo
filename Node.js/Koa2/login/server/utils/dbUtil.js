@@ -31,10 +31,10 @@ let query = (sql, values) => {
 }
 
 // 增
-let insertData = (table, values) => {
-  let _sql = `INSERT INTO ?? SET ?`
-  return query(_sql, [table, values])
-}
+// let insertData = (table, values) => {
+//   let _sql = `INSERT INTO ?? SET ?`
+//   return query(_sql, [table, values])
+// }
 
 // 删
 
@@ -46,6 +46,5 @@ let insertData = (table, values) => {
 // 改
 
 module.exports = {
-  query,
-  insertData
+  query
 }

@@ -3,6 +3,7 @@ const userModel = require('../models/userModel')
 module.exports = {
   async login (user) {
     let result = await userModel.getUserByUsernameAndPassword(user)
+    return result
   },
   // 注册
   async register (user) {

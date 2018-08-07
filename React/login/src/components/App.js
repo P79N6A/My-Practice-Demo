@@ -5,10 +5,12 @@ const { Content, Header } = Layout
 
 const App = () => {
   return (
-    <div>
-      <Layout>
-        <Header>hahaha</Header>
-        <Content><Login></Login></Content>
+    <div style={{ height: '100%' }}>
+      <Layout style={{ display: 'flex', height: '100%', flexDirection: 'column' }}>
+        {/* <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}></Header> */}
+        <Content style={{ flex: '1 1 auto', display: 'flex', alignItems: 'center' }}>
+          <Login style={{ height: '100%' }}></Login>
+        </Content>
       </Layout>
     </div>
   )

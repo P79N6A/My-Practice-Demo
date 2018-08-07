@@ -23,6 +23,17 @@ class LoginForm extends React.Component {
           method: 'post',
           data: values
         })
+        .then(res => {
+          console.log(res)
+          if (res.data.success) {
+            Message.success('登录成功')
+          } else {
+            Message.error('用户名或密码错误')
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
       }
     })
   }
