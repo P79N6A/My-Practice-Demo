@@ -10,6 +10,10 @@ class LinkedList {
     this._length = 0
     this._head = null
   }
+  // 获取头节点
+  getHead () {
+    return this._head
+  }
   // 添加节点
   append (element) {
     let node = new Node(element)
@@ -94,12 +98,14 @@ class LinkedList {
   }
 }
 
-var list = new LinkedList()
-list.append(15)
-list.append(16)
-list.insert(100, 0)
-console.log(list.indexOf(100))
-console.log(list.indexOf('16'))
-console.log(list.remove(100))
-console.log(list.size())
+// var list = new LinkedList()
+// list.append(15)
+// list.append(16)
+// list.insert(100, 0)
+// console.log(list.indexOf(100))
+// console.log(list.indexOf('16'))
+// console.log(list.remove(100))
+// console.log(list.size())
 // console.log(list.removeAt(0))
+
+module.exports = LinkedList

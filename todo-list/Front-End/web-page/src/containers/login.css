@@ -1,0 +1,13 @@
+/* 登录框容器 */
+.login-contanter {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* 操作按钮容器 */
+.operate-btn-container {
+  display: flex;
+  justify-content: space-between;
+}
