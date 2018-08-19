@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form, Input, Button, Icon} from 'antd';
-import './login.css'
+import './register.css'
 
 const FormItem = Form.Item
 
@@ -9,17 +9,19 @@ class LoginForm extends React.Component {
     this.props.form.validateFields(
       (err, values) => {
         if (!err) {
-          // 提交给后台
+          // 提交给后台 注册
           console.log('SUCCESS')
+          // 成功后.. 返回登录的.. 把用户名密码返回过去
+          
         }
       }
     )
   }
 
-  handleRegisterClick = () => {
+  goBack = () => {
     // 路由跳转
     console.log('thi', this.props)
-    this.props.history.push('/register')
+    this.props.history.push('/login')
     // context.router.push(path)('/register')
   }
 
@@ -51,8 +53,8 @@ class LoginForm extends React.Component {
           )}
         </FormItem>
         <div className="operate-btn-container">
-          <Button onClick={this.handleSubmit}>登录</Button>
-          <Button onClick={this.handleRegisterClick}>注册</Button>
+          <Button onClick={this.goBack}>返回</Button>
+          <Button onClick={this.handleSubmit}>注册</Button>
         </div>
       </Form>
     )
@@ -61,7 +63,7 @@ class LoginForm extends React.Component {
 
 LoginForm = Form.create({})(LoginForm)
 
-class Login extends React.Component {
+class Register extends React.Component {
   render () {
     return (
       <div className="login-contanter">
@@ -71,4 +73,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login
+export default Register
