@@ -1,6 +1,6 @@
 import React from 'react'
 // import Tacos from './Tacos'
-import { Route, Link, NavLink, Redirect } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 import About from './About'
 import Message from './Message'
 import Param from './Param'

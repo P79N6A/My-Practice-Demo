@@ -1,6 +1,6 @@
 import React from 'react'
 import { Layout } from 'antd'
-import Login from '../containers/Login'
+import Login from '@/containers/Login'
 const { Content, Header } = Layout
 
 const App = () => {
