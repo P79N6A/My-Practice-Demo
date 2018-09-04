@@ -46,15 +46,14 @@ class Dictionary {
   }
 }
 
-Dictionary.prototype.x = 11111
+// Dictionary.prototype.x = 11111
 
-var d = new Dictionary()
-d.has('name')
-d.set('name', 'Lin')
-// d.remove('name')
-d.values()
-d.size()
-d.getItems()
+// var d = new Dictionary()
+// d.has('name')
+// d.set('name', 'Lin')
+// // d.remove('name')
+// d.values()
+// d.size()
+// d.getItems()
 
-
-
+module.exports = Dictionary

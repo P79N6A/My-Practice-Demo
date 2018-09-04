@@ -1,5 +1,5 @@
 function Queue (items) {
-  this.items = items
+  this.items = items || []
 }
 
 Queue.prototype.enqueue = function (elem) {
@@ -24,3 +24,5 @@ Queue.prototype.print = function (elem) {
   console.log(this.items.toString())
   // console.log(this.items.join(','))
 }
+
+module.exports = Queue
