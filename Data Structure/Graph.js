@@ -1,5 +1,6 @@
 const Dictionary = require('./Dictionary')
 const Queue = require('./Queue')
+const Stack = require('./Stack')
 
 class Graph {
   constructor() {
@@ -60,6 +61,78 @@ class Graph {
     }
     return color
   }
+  // 改进的广度优先
+  BFS (v) {
+    var color = this.initializeColor(),
+        queue = new Queue(),
+        d = [], // 存储 v 到某个顶点 w 的最短距离
+        pred = [] // 存储每个顶点的前溯顶点
+    queue.enqueue(v)
+    // 初始化
+    for (var i = 0; i < this.vertices.length; i++) {
+      d[this.vertices[i]] = 0
+      pred[this.vertices[i]] = null
+    }
+    while (!queue.isEmpty()) {
+      var u = queue.dequeue()
+      var neighbors = this.adjList.get(u)
+      for (var i = 0; i < neighbors.length; i++) {
+        var w = neighbors[i]
+        if (color[w] === 'white') {
+          color[w] = 'grey'
+          // u 是当前出队的顶点
+          // w 是 u 的相邻顶点
+          d[w] = d[u] + 1
+          pred[w] = u
+          queue.enqueue(w)
+        }
+      }
+      color[u] = 'black'
+    }
+    return {
+      distance: d,
+      predecessors: pred
+    }
+  }
+  // 获取顶点到其他顶点的路径
+  getPath (fromVertex) {
+    var vertices = this.vertices
+    for (var i = 0; i < vertices.length; i++) {
+      var toVertex = vertices[i]
+      // 如果当前的点和源顶点相同，则进入下一个循环
+      if (fromVertex === toVertex) {
+        continue
+      }
+      var path = new Stack()
+      var shorttestPath = this.BFS(fromVertex)
+      for (var v = toVertex; v !== fromVertex; v = shorttestPath.predecessors[v]) {
+        path.push(v)
+      }
+      var str = fromVertex
+      while (!path.isEmpty()) {
+        str += ' - ' + path.pop()
+      }
+      console.log(str)
+    }
+  }
+  // 深度优先
+  dfs () {
+    var color = this.initializeColor()
+    // for (var i = 0; i < this.vertices.length; i++) {
+      this.dfsVisit(this.vertices[0], color)
+    // }
+  }
+  dfsVisit (u, color) {
+    color[u] = 'grey'
+    console.log(u)
+    var neighbors = this.adjList.get(u)
+    for (var i = 0; i < neighbors.length; i++) {
+      var w = neighbors[i]
+      if (color[w] === 'white') {
+        this.dfsVisit(w, color)
+      }
+    }
+  }
 }
 
 var graph = new Graph()
@@ -77,5 +150,11 @@ graph.addEdge('D', 'H');
 graph.addEdge('B', 'E');
 graph.addEdge('B', 'F');
 graph.addEdge('E', 'I');
-console.log(graph.toString())
-graph.bfs('A')
+// console.log(graph.toString())
+// graph.bfs('A')
+
+// var o = graph.BFS('A')
+// console.log(o.predecessors)
+
+// graph.getPath('B')
+graph.dfs()
