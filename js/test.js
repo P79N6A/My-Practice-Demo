@@ -36,7 +36,7 @@
 
 // function de (delay) {
 //   console.log('delay', delay)
-  
+
 //   return new Promise((resolve) => {
 //     setTimeout(() => {
 //       console.log(`延迟${delay}执行啦`)
@@ -51,7 +51,7 @@
 //     var m = await de(delay)
 //     return m
 //   })
-  
+
 //   for (var item of t) {
 //     console.log('item', await item)
 //   }
@@ -59,17 +59,53 @@
 
 // test()
 
+// (function () {
+//   function foo () {
+//     console.log('function')
+//   }
+//   var foo = undefined
 
-(function () {
-  function foo () {
-    console.log('function')
-  }
-  var foo = undefined
+//   console.log(foo) // undefined
+// }())
 
-  console.log(foo) // undefined
-}())
+// (function () {
+//   console.log(aaa)
+//   aaa = 100
+// }())
 
-(function () {
-  console.log(aaa)
-  aaa = 100
-}())
+
+// function argsAsArray(fn, arr) {
+//   return fn(...arr)
+// }
+
+// var a = argsAsArray(function (greeting, name, punctuation) {
+//   console.log('h', greeting);
+//   var str = greeting + ', ' + name + (punctuation || '!');
+//   console.log(str)
+//   return str
+// }, ['Hello', 'Ellie', '!'])
+
+// var reciveMessage = function () {
+//   var message = Array.prototype.shift.call(arguments); // arguments 的第一个参数为消息名称        
+//   operations[message].apply(this, arguments);
+// }
+
+function iterate(obj) {
+  // var keys = Object.keys(obj)
+  // for (var key of obj) {
+  //   console.log(key)
+  // }
+  // var result = []
+  // for (var i = 0; i < keys.length; i++) {
+  //     if (obj.hasOwnProperty(keys[i])) {
+  //       result.push(`${keys[i]}: ${obj[keys[i]]}`)
+  //     }
+  // }
+//   return Object.getOwnPropertyNames(obj).map(function (key) {
+//     return key + ': ' + obj[key];
+// });
+}
+
+var C = function() {this.foo = 'bar'; this.baz = 'bim';}; 
+C.prototype.bop = 'bip'; 
+console.log(iterate(new C()))
