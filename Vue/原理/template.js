@@ -30,3 +30,8 @@ function parseStarTag () {
 parseStarTag()
 
 var str = /^<((?:[a-zA-Z_][\w\-\.]*\:)?[a-zA-Z_][\w\-\.]*)/
+
+function advance (n) {
+  index += n
+  html = html.substring(n)
+}
