@@ -18,6 +18,15 @@ var patt = /123/g
 console.log(patt.exec('123123'))
 console.log(patt.exec('123123'))
 
+/**
+ * str.match(regexp)
+ * 在指定字符串执行搜索匹配
+ * regexp: 正则
+ * 返回一个结果数组或者 null
+ */
+var patt = /(a[abdc])/g
+console.log('aebbacad'.match(patt))
+
 // 元字符
 var patt = /ffff /
 console.log(patt.test(123))
@@ -43,3 +52,8 @@ var patt = /h(?!i)/
 var str = 'hello,hi,happy'
 console.log(patt.exec(str))
 console.log(patt.exec(str))
+
+// 贪婪
+var patt = /!.+!/g
+var str = '!I have an apple! !an orange! !a pear!'
+console.log(str.match(patt))
