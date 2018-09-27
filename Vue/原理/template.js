@@ -30,3 +30,6 @@ function parseStarTag () {
 parseStarTag()
 
 var str = /^<((?:[a-zA-Z_][\w\-\.]*\:)?[a-zA-Z_][\w\-\.]*)/
+
+var patt = /(?:123)\1/
+console.log('123123'.match(patt))
