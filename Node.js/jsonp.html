@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>jsonp</title>
+</head>
+<body>
+  <button id="btn">click</button>
+  <script>
+    function jsonp (url) {
+      // 创建 script 标签
+      var script = document.createElement('script')  
+      script.src = url
+      script.id = 'jsonp'
+      document.getElementsByTagName('body')[0].appendChild(script)
+
+      // 移除标签，清除占用内存
+      script.onload = () => {
+        document.getElementsByTagName('body')[0].removeChild(script)
+        script = null
+      }
+    }
+    
+    function sendHaha (msg) {
+      console.log(msg)
+    }
+    
+    var btn = document.getElementById('btn')
+    btn.onclick = () => {
+      jsonp('http://localhost:3333/haha?callback=sendHaha')
+    }
+  </script>
+</body>
+</html>

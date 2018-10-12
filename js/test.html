@@ -5,8 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <style>
+  </style>
 </head>
 <body>
-  
+  <ul id="test"></ul>
 </body>
+<script>
+  setTimeout(() => {
+    // 总数据
+    const total = 100000
+    // 一次插入的数量
+    const once = 1
+    // 渲染总共需要几次
+    const loopCount = total / once
+    let countOfRender = 0
+
+    let ul = document.querySelector('ul')
+
+    function add () {
+      const fragment = document.createElement('fragment')
+      for (let i = 0; i < once; i++) {
+        let li = document.createElement('li')
+        li.innerText = Math.floor(Math.random() * total)
+        fragment.appendChild(li)
+      }
+      ul.appendChild(fragment)
+      countOfRender++
+      loop()
+    }
+    function loop () {
+      if (countOfRender < loopCount) {
+        window.requestAnimationFrame(add)
+      }
+    }
+    window.requestAnimationFrame(add)
+  }, 0)
+</script>
 </html>
