@@ -30,3 +30,12 @@ son instanceof Father // son.__proto__.proto__ == Father.protype
  * A.prototype.isPrototypeOf(a)
  */
 Son.prototype.isPrototypeOf(son)
+
+
+// 查看区别
+var o = {}
+var father = Object.create(o)
+var son = Object.create(father)
+
+console.log(o.isPrototypeOf(son))
+console.log(son instanceof o)

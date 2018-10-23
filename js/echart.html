@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+</head>
+
+<body>
+  <div id="main" style="width: 600px; height: 400px"></div>
+</body>
+<script src="https://cdn.bootcss.com/echarts/4.2.0-rc.1/echarts-en.common.js"></script>
+<script>
+  var myChart = echarts.init(document.getElementById('main'))
+  var option = {
+    legend: {},
+    tooltip: {},
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      data: ['8-10', '8-11', '8-12', '8-13']
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [{
+      type: 'line',
+      name: 'dianliu',
+      data: [10, 20, 100, 50]
+    }]
+  }
+
+  myChart.setOption(option)
+</script>
+
+</html>

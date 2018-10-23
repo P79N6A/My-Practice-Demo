@@ -1,0 +1,104 @@
+@import 'demo.css';
+
+/* p.warning {
+  color: red;
+}
+
+p .warning {
+  color: blue
+}
+
+.btn.warning {
+  background: red;
+}
+
+#Test {
+  color: yellow;
+} */
+
+/* div {
+  height: 100px;
+  width: 100px;
+}
+div[class] {
+  color: green;
+}
+div[class="desk chair"] {
+  background: pink;
+  margin: 100px;
+} */
+/* div.desk {
+  background: yellow;
+} */
+/* div[class~="miss"] {
+  background: blue;
+}
+div[class*="miss"][id] {
+  background: purple;
+}
+div[class^="miss"] {
+  background: brown;
+}
+div[class$="miss"] {
+  background: orange;
+}
+div[lang|='en'] {
+  color: blue;
+}
+div + p {
+  color: green;
+} */
+
+/* div:first-child {
+  color: red;
+} */
+/* div :first-child {
+  color: pink;
+} */
+/* div span:first-child {
+  color: blue;
+} */
+/* div span :first-child {
+  color: yellow;
+} */
+/* p:first-child {
+  color: purple;
+} */
+
+/* ::first-letter {
+  color: green;
+} */
+
+/* div[lang~="a"] {
+  color: red;
+} */
+
+/* div {
+  color: blue;
+} */
+
+/* #ttt {
+  color: blue;
+} */
+
+
+
+/* * {
+  color: yellow;
+}
+
+div {
+  color: blue;
+} */
+
+
+/* p {
+  color: red;
+}
+div {
+  color: blue;
+} */
+
+div {
+  color: blue;
+}
