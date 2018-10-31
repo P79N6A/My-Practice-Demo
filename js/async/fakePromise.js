@@ -15,12 +15,15 @@ function MyPromise(fn) {
   _this.resolve = function (value) {
     if (value instanceof MyPromise) {
       // 如果 value 是个 Promise，递归执行
-      return value.then(_this.resolve, _this.reject)
+      var a = value.then(_this.resolve, _this.reject)
+      console.log('a', a)
+      return a
     }
     setTimeout(() => { // 异步执行，保证执行顺序
       if (_this.currentState === PENDING) {
         _this.currentState = RESOLVED;
         _this.value = value;
+        console.log('cb', _this.resolvedCallbacks)
         _this.resolvedCallbacks.forEach(cb => cb());
       }
     })
@@ -171,9 +174,16 @@ function resolutionProcedure(promise2, x, resolve, reject) {
 }
 
 var p = new MyPromise(resolve => {
-  resolve(1)
+  throw new Error('e')
 })
 
-p.then(data => {
-  console.log(data)
+var p2 = new MyPromise(resolve => {
+  // console.log(p)
+  resolve(p)
+})
+
+p2.then(() => {
+  console.log('true')
+}, () => {
+  console.log('false')
 })

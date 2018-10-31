@@ -101,18 +101,34 @@
 //   console.log('ya')
 // })
 
-var p1 = new Promise((resolve, reject) => {
-  resolve('p1')
+// var p1 = new Promise((resolve, reject) => {
+//   resolve('p1')
+// })
+
+// var p2 = new Promise(resolve => {
+//   resolve(p1)
+// })
+
+// p2.then(data => {
+//   console.log('p2', data)
+// })
+// .catch(data => {
+//   console.log(typeof data)
+//   console.log(data)
+// })
+
+var p = new Promise(resolve => {
+  throw new Error('e')
 })
 
 var p2 = new Promise(resolve => {
-  resolve(p1)
+  console.log(p)
+  resolve(p)
 })
 
-p2.then(data => {
-  console.log('p2', data)
+p2.then(() => {
+  console.log('true')
 })
-.catch(data => {
-  console.log(typeof data)
-  console.log(data)
+.catch(() => {
+  console.log('false')
 })

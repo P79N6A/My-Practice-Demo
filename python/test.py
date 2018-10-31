@@ -1,3 +1,2 @@
-list = [1,2,3,4]
-
-subList = list.map(lambda x:x-1)
+list = (1,2,3)
+print(i for i in list)
