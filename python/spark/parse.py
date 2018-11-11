@@ -286,4 +286,7 @@ avgSimNon = (nonDupsRDD
 # 省略部分输出
 print 'And for non duplicates, it is %s.' % avgSimNon
 
-gsFailed 
+# gsFailed 
+
+
+# 18
