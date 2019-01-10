@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>MutaionObserver</title>
+</head>
+<body>
+  <div id="root">
+    123
+  </div>
+
+  <script>
+    var targetNode = document.getElementById('root')
+
+    function cb (a) {
+      console.log('callback')
+      console.log(a)
+    }
+
+    var options = {
+      attributes: true
+    }
+    var observer = new MutationObserver(cb)
+    observer.observe(targetNode, options)
+
+    setTimeout(() => {
+      targetNode.style.color = 'red'
+    }, 1000)
+  </script>
+</body>
+</html>

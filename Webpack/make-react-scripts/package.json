@@ -1,0 +1,34 @@
+{
+  "name": "make-react-scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./packages/make-react-scripts/bin/make-react-scripts.js start",
+    "test-start": "node ./packages/make-react-scripts/config/webpack.dev.js",
+    "webpack": "webpack --config ./packages/make-react-scripts/config/webpack.dev.js",
+    "server": "webpack-dev-server --config ./packages/make-react-scripts/config/webpack.dev.js --open"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "workspaces": "packages/*",
+  "devDependencies": {
+    "cross-spawn": "^6.0.5",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
+  },
+  "dependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "clean-webpack-plugin": "^1.0.0",
+    "css-loader": "^1.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  }
+}

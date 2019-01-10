@@ -1,0 +1,38 @@
+@charset "UTF-8";
+/* 嵌套、变量、注释 */
+#haha {
+  font-size: 20px;
+}
+#haha p {
+  color: blue;
+}
+#haha span {
+  color: 20px;
+}
+
+#haha {
+  border-style: solid;
+}
+
+/* 混合 */
+#text {
+  color: green;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* 继承 */
+.p, a {
+  font-size: 10px;
+}
+
+.m .p, .m a {
+  font-weight: bold;
+}
+
+a {
+  color: orange;
+  font-size: 16px;
+}
+
+/*# sourceMappingURL=output.css.map */

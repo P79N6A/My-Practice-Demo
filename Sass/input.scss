@@ -1,0 +1,50 @@
+
+$p-color: blue;
+$span-color: 20px;
+$font-size: 20px;
+@import 'import.scss';
+/* 嵌套、变量、注释 */
+#haha {
+  font-size: $font-size;
+
+  p {
+    color: $p-color;
+  }
+  span {
+    color: $span-color;
+  }
+}
+
+
+
+#haha {
+  border: {
+    style: solid
+  }
+}
+
+/* 混合 */
+@mixin text-style($normal, $color: $normal) {
+  color: $color;
+  font: {
+    size: 18px;
+    weight: bold;
+  }
+}
+
+#text {
+  @include text-style(green);
+}
+
+/* 继承 */
+.p {
+  font-size: 10px;
+}
+.m .p {
+  font-weight: bold;
+}
+a {
+  color: orange;
+  font-size: 16px;
+  @extend .p;
+}

@@ -23,7 +23,6 @@ function MyPromise(fn) {
       if (_this.currentState === PENDING) {
         _this.currentState = RESOLVED;
         _this.value = value;
-        console.log('cb', _this.resolvedCallbacks)
         _this.resolvedCallbacks.forEach(cb => cb());
       }
     })
@@ -173,17 +172,27 @@ function resolutionProcedure(promise2, x, resolve, reject) {
   }
 }
 
-var p = new MyPromise(resolve => {
-  throw new Error('e')
+// var p = new MyPromise(resolve => {
+//   throw new Error('e')
+// })
+
+// var p2 = new MyPromise(resolve => {
+//   // console.log(p)
+//   resolve(Promise.resolve('ha'))
+// })
+
+// p2.then(() => {
+//   console.log('true')
+// }, () => {
+//   console.log('false')
+// })
+
+var p = new MyPromise((resolve, reject) => {
+  // reject(1)
+  var a = new MyPromise(resolve => resolve(4))
+  resolve(a)
 })
 
-var p2 = new MyPromise(resolve => {
-  // console.log(p)
-  resolve(p)
-})
-
-p2.then(() => {
-  console.log('true')
-}, () => {
-  console.log('false')
+var p1 = p.then((v) => {
+  console.log(v)
 })
