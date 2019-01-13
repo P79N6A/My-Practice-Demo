@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>BOM</title>
+</head>
+<body>
+  <script>
+    // window
+    window.a = 10
+    delete window.a
+    console.log(window.a) // undefined
+    var b = 1
+    delete b
+    console.log(window.b) // 1
+  </script>
+</body>
+</html>
