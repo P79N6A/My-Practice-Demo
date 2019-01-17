@@ -20,3 +20,16 @@ new Promise(resolve => {
 })
 
 console.log(5)
+
+
+var sendBtn = document.getElementsByClassName('input-send j_input-send')[0]
+var sendTextInput = document.getElementsByClassName('input-box j_input-box input-box_free')[0]
+
+function sendTv (msg) {
+  sendTextInput.value = msg
+  sendBtn.click()
+}
+
+var setTag = setInterval(() => {
+  sendTv('浩克最棒~')
+}, 2000)

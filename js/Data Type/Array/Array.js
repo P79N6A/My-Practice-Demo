@@ -187,3 +187,19 @@ console.log(arr.reduce((accumulator, curr, index, arr) => {
   console.log(index)
   return accumulator + curr
 }))
+
+
+// 数组去重
+var obj = {}
+var arr = [1, 1, 2, 2, 3, 3, 4]
+arr.forEach(item => {
+  if (obj[item]) {
+    obj[item]++
+  } else {
+    obj[item] = 1
+  }
+})
+console.log(obj)
+
+var arr = [1, 1, 2, 2, 3, 3, 4]
+var set = Array.from(new Set(arr))
