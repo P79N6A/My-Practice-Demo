@@ -1,87 +1,199 @@
-// function* helloGenerator () {
-//   yield 'hello'
-//   yield 'generator'
-//   return 'bye'
-// }
+// yield next 使用
+function* perfect () {
+  var x = 1
+  var y = 2
+  var sum
+  sum = yield x + y
+  console.log(sum)
+  yield 'xixi'
+}
 
-// const hi = helloGenerator()
-// console.log(hi.next())
-// console.log(hi.next())
-// console.log(hi.next())
+var ge = perfect()
+ge.next()
+ge.next(10)
+ge.next()
 
-// function* generator () {
-//   var x = 1
-//   var y = 2
-//   var sum 
-//   sum = yield x + y // 执行到这里第一次停止
-  
-//   console.log(sum) // undefined
-//   yield 'haha' // 第二次停止
 
-//   return sum // 第三次停止
-// }
+// throw 
+function* generator () {
+  try {
+    yield 1
+  } catch (err) {
+    console.log('err', err)
+    yield 'haha'
+    yield 'xixi'
+  }
+}
+var ge = generator()
+console.log(ge.next())
+console.log(ge.throw('?'))
+console.log(ge.next())
+console.log(ge.next())
 
-// var ge = generator()
-// console.log(ge.next())
-// console.log(ge.next())
 
-// function* generator () {
-//   try {
-//     yield
-//   } catch (err) {
-//     console.log('err', err)
-//     yield '?'
-//     yield '??'
-//   }
-// }
-// const ge = generator()
-// ge.next()
-// ge.throw(new Error(new Error('出错了！')))
-// ge.next()
+// return 方法
+function* genenrator () {
+  yield 1
+  yield 2
+  yield 3
+}
+var ge = generator()
+ge.return(100) // {value: 100, done: true}
 
-// function* otherGenerator () {
-//   yield 'hhahahah'
-//   yield 'miaomiaomiao'
-//   return 'every day'
-// }
+function* generator () {
+  try {
+    yield 1
+    yield 2
+  } catch (e) {}
+  finally {
+    yield 3
+    yield 4
+  }
+}
+var ge = generator()
+console.log(ge.next())// {value: 1, done: false}
+console.log(ge.return(100)) // {value: 3, done: false}
+console.log(ge.next()) // {value: 4, done: false}
+console.log(ge.next()) // {value: 100, done: true}
 
-// function* generator () {
-//   yield 1 + 2
-//   var a = yield* otherGenerator()
-//   console.log('return', a)
-//   yield 444
-//   return 'xixi'
-// }
 
-// var ge = generator()
-// for (var k of ge) {
-//   console.log(k)
-// }
+// yield* 表达式
+function* otherGenerator () {
+  yield 'ha'
+  yield 'xi'
+  return 4
+}
+function* generator () {
+  yield 5
+  var value = yield* otherGenerator()
+  console.log(value)
+}
+var ge = generator()
+for (var v of ge) {
+  console.log(v)
+}
 
-// var arr = [1,[2,3,[4,5,[6,7]], 8], 9]
+/// 实例
+/// 模拟实现 flatMap
+function* flatMap (item) {
+  if (Array.isArray(item)) {
+    for (var i = 0; i < item.length; i++) {
+      yield* flatMap(item[i])
+    }
+  } else {
+    yield item
+  }
+}
+var ge = flatMap([1, [2, 3], 4, [5, 6], 7])
+for (var v of ge) {
+  console.log(v)
+}
 
-// function* iterTree (arr) {
-//   for (var i = 0; i < arr.length; i++) {
-//     var item = arr[i]
-//     if (Array.isArray(item)) {
-//       yield *iterTree(arr)
-//     } else {
-//       yield item
-//     }
-//   }
-// }
+// generator 函数的 this
+function* generator () {
+  console.log(this)
+}
+var ge = generator()
 
-// for (var k of iterTree(arr)) {
-//   console.log(k)
-// }
 
-// var obj = {
-//   *generator () {},
-//   otherGenerator: function* () {}
-// }
 
-// function* generator () {
-//   this.x = 111
-// }
-// var ge = generator()
-// console.log(ge.x)
+// 异步应用
+function readFile (filename, cb) {
+  cb(filename)
+}
+
+var thunk = function (fn) {
+  return function () {
+    var args = [...arguments]
+    return function (callback) {
+      args.push(callback)
+      return fn.apply(this, args)
+    }
+  }
+}
+var readFileChunk = thunk(readFile)
+readFileChunk('1.txt')(function (data) { console.log(data) })
+
+var thunk = function (fn) {
+  return function (...args) {
+    return function (callback) {
+      return fn.apply(this, [...args, callback])
+    }
+  }
+}
+var readFileChunk = thunk(readFile)
+readFileChunk('1.txt')(function (data) { console.log(data) })
+
+// 递归
+function readFile (filename, cb) {
+  cb('no error', filename)
+}
+var thunk = function (fn) {
+  return function (...args) {
+    return function (callback) {
+      return fn.apply(this, [...args, callback])
+    }
+  }
+}
+var readFileChunk = thunk(readFile)
+
+function run (fn) {
+  var gen = fn()
+
+  function next (err, data) {
+    var result = gen.next(data)
+    if (result.done) return
+    result.value(next)
+  }
+
+  next()
+}
+
+function* generator () {
+  var a = yield readFileChunk('A')
+  console.log(a)
+  var b = yield readFileChunk('B')
+  var c = yield readFileChunk('C')
+}
+run(generator)
+
+
+// 基于 promise 的自动化
+function readFile (filename, cb) {
+  cb(filename)
+}
+
+var readFilePromise = function (fileName) {
+  return new Promise((resolve, reject) => {
+    readFile(fileName, function (data) {
+      resolve(data)
+    })
+  })
+}
+
+function* run () {
+  var f1 = yield readFilePromise('A')
+  console.log(f1)
+  var f2 = yield readFilePromise('B')
+  console.log(f2)
+}
+
+// var gen = run()
+// gen.next().value.then(function (data) {
+//   gen.next(data).value.then(function (data) {
+//     gen.next(data).value.then(function () {})
+//   })
+// })
+
+function ha (fn) {
+  var gen = fn()
+
+  function nextStep (data) {
+    var result = gen.next(data)
+    if (result.done) return result.value
+    result.value.then(nextStep)
+  }
+
+  nextStep()
+}
+ha(run)
