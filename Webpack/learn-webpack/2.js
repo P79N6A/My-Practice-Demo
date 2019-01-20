@@ -1,1 +1,3 @@
-export var a = 1
+export function print () {
+  console.log('print')
+}

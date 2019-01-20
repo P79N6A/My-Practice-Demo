@@ -1,3 +1,14 @@
-import a from './2.js'
+function getComponent () {
+  var btn = document.createElement('button')
+  btn.innerText = 'click'
+  btn.onclick = function () {
+    import(/* webpackChunkName: "print" */  './2.js').then(module => {
+      console.log(module)
+    })
+  }
 
-console.log(a)
+  document.getElementsByTagName('body')[0].appendChild(btn)
+}
+
+
+getComponent()

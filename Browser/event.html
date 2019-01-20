@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>event</title>
+</head>
+<body>
+  <div id="box">
+    <button id="btn">click</button>
+  </div>
+
+  <script>
+    var box = document.getElementById('box')
+    var btn = document.getElementById('btn')
+
+    // 目标对象上的触发，按照注册的先后顺序执行
+    // btn.addEventListener('click', () => console.log('bubble'), false)
+    // btn.addEventListener('click', () => console.log('capture'), true)
+
+    // 非目标对象上的触发，对于同一元素，按照事件传播顺序，再按注册顺序触发。
+    // box.addEventListener('click', () => console.log('bubble1'), false)
+    // box.addEventListener('click', () => console.log('bubble2'), false)
+    // box.addEventListener('click', () => console.log('capture1'), true)
+    // box.addEventListener('click', () => console.log('capture2'), true)
+
+    // onevent 注册事件 DOM 0
+    // btn.onclick = () => { console.log('first') }
+    // btn.onclick = () => { console.log('second') } // second
+    // DOM 2
+    // btn.addEventListener('click', () => { console.log('first') })
+    // btn.addEventListener('click', () => { console.log('second') })
+
+    // 移除事件
+    // var test = () => {console.log('haha')}
+    // btn.addEventListener('click', test)
+    // btn.removeEventListener('click', test)
+
+
+    // 阻止事件传播
+    // stopPropagation
+    // box.addEventListener('click', (e) => {
+    //   e.stopPropagation()
+    //   console.log('haha')
+    // }, true)
+    // box.addEventListener('click', (e) => {
+    //   console.log('xixi')
+    // }, true)
+    // btn.addEventListener('click', () => {
+    //   console.log('div')
+    // })
+    // stopImmediatePropagation
+    // box.addEventListener('click', (e) => {
+    //   e.stopImmediatePropagation()
+    //   console.log('haha')
+    // }, true)
+    // box.addEventListener('click', (e) => {
+    //   console.log('xixi')
+    // }, true)
+    // btn.addEventListener('click', () => {
+    //   console.log('div')
+    // })
+
+
+    // 自定义事件
+    // var event = document.createEvent('HTMLEvents')
+    // event.initEvent('alert')
+    // document.addEventListener('alert', () => {
+    //   console.log('ahah')
+    // })
+    // document.dispatchEvent(event)
+
+
+    // HTML5 事件
+    document.addEventListener('contextmenu', (e) => {
+      console.log(e)
+      e.preventDefault()
+    })
+  </script>
+</body>
+</html>
