@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>cross</title>
+</head>
+<body>
+  <script>
+    // 简易写法
+    // function jsonp (data) {
+    //   console.log(data)
+    // }
+  </script>
+  <!-- <script src="http://127.0.0.1:8899/api?param1=a&param2=b&callback=jsonp"></script> -->
+
+  <script>
+    // 通用写法
+    function jsonp (url, jsonCallback) {
+      var script = document.createElement('script')
+      // 重新拼接回调函数
+      url += (url.includes('?') ? '&'  : '?') + 'callback=' + jsonCallback.name
+      script.src = url
+      script.async = true
+
+      document.body.appendChild(script)
+    }
+    jsonp('http://localhost:8899?name=lin', test)
+
+    function test (data) {
+      console.log(data)
+    }
+  </script>
+</body>
+</html>

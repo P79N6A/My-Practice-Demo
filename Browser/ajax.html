@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ajax</title>
+</head>
+<body>
+  <form id="form">
+    <input name="username" type="text" />
+    <input name="password" type="password" autocomplete="on"/>
+
+    <input type="radio" id="male" name="sex" value="male" checked/>
+    <label for="male">男</label>
+
+    <input type="radio" id="female" name="sex" value="female" />
+    <label for="female">女</label>
+
+    <input type="checkbox" id="badminton" name="hobby" value="badminton" />
+    <label for="badminton">羽毛球</label>
+
+    <input type="checkbox" id="basketball" name="hobby" value="basketball" />
+    <label for="basketball">篮球</label>
+
+    <input type="file" id="file" name="file" value="上传文件" />
+
+    <button id="button">submit</button>
+  </form>
+  <script>
+    /*
+     * 原生 xhr 实现的 ajax
+     * @param {string} url 请求的 url
+     * @param {string} method 请求方法
+     * @param {object | HTMLFormElement } 传输的数据，为对象或 form 元素
+     * @param {object} 请求头
+     */
+    function ajax (url, method, data, cb, headers) {
+      // 实例化 xhr
+      // 设置参数的默认值，考虑到兼容，就没用 ES6 的参数默认值语法了
+      var xhr = new XMLHttpRequest()
+      method = method ? method.toUpperCase(method) : 'GET'
+      data = data || {}
+      cb = cb || function () {}
+      headers = headers || {}
+
+      // 判断是 GET 还是 POST
+      if (method === 'GET') {
+        // 将 data 变为查询字符串
+        xhr.open(method, url + '?' + objectToQuerystring(data))
+        xhr.send(null)
+      } else if (method === 'POST') {
+        xhr.open(method, url)
+        // 要根据请求头的 Content-Type 字段，来决定做什么
+        // 如果没有这个字段，就默认是 application/json
+        if (!headers || !headers['Content-Type']) {
+          headers['Content-Type'] = 'application/json'
+        }
+        var contentType = headers['Content-Type']
+
+        // 设置请求头
+        for (var key in headers) {
+          if (headers.hasOwnProperty(key)) {
+            xhr.setRequestHeader(key, headers[key])
+          }
+        }
+        // 如果是要发送 json
+        if (contentType === 'application/json') {
+          data = JSON.stringify(data)
+        } else if (contentType === 'application/x-www-form-urlencoded') { // 请求体的内容是查询字符串的形式
+          // 把 data 变为查询字符串
+          data = objectToQuerystring(data)
+        } else if (contentType === 'application/form-data') { // form-data 类型
+          // 直接封装 formData，如果不兼容，就用 form.submit 就好了 u.u（不知道可以不可以）
+          // 判断是不是 form element，如果不是，就封装为 form data
+          if (data && data.tagName.toLowerCase() === 'form') {
+            data = new FormData(data)
+          } else {
+            // 封装为 form data 形式 u.u 好复杂的，先不写着鸭
+            // 详细的可以看 mdn 的~
+          }
+        }
+        xhr.send(data)
+      }
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200 || xhr.status === 304) {
+            cb(xhr.responseText)
+          }
+        }
+      }
+
+      // 把对象转为查询字符串
+      function objectToQuerystring (obj) {
+        if (obj && Object.prototype.toString(obj) !== '[object Object]') {
+          throw Error(obj + '不是对象呀')
+        }
+
+        var querystringArr = []
+        for (var key in obj) {
+          if (obj.hasOwnProperty(key)) {
+            querystringArr.push(key + '=' + obj[key])
+          }
+        }
+        return querystringArr.join('&')
+      }
+    }
+    
+
+    function cb (data) {
+      console.log('收到了：', data)
+    }
+
+    // GET test
+    // ajax('http://localhost:7788', 'GET', {username: 123, password: 123}, cb)
+    // POST json test
+    // ajax('http://localhost:7788', 'POST', {username: 123, password: 123}, cb)
+    
+    // 下面测试表单提交的 xhr 提交方式
+    // POST form data
+    // var form = document.getElementById('form')
+    // var btn = document.getElementById('button')
+    // btn.onclick = function (e) {
+    //   e.preventDefault()
+    //   ajax('http://localhost:7788', 'POST', form, cb, {
+    //     'Content-Type': 'application/form-data'
+    //   })
+    // }
+
+    // POST form json
+    // 其实就是把表单中的所有东东提出来，当成 json 传而已
+    // 和普通的 ajax 没差的，这个解析过程就不写了 u.u
+  </script>
+</body>
+</html>

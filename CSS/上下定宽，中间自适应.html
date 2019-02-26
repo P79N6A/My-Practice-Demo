@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>上下定宽，中间自适应</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+
+    /* 绝对定位 */
+    .container {
+      height: 100%;
+      display: relative;
+    }
+    .header {
+      height: 60px;
+      background: lightgreen;
+    }
+    .main {
+      position: absolute;
+      top: 60px;
+      bottom: 40px;
+      left: 0;
+      right: 0;
+      background: lightblue;
+    }
+    .footer {
+      position: absolute;
+      height: 40px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: lightpink;
+    }
+
+
+    /* calc */
+    /* .container {
+      height: 100%;
+    }
+    .header {
+      height: 60px;
+      background: lightgreen;
+    }
+    .main {
+      height: calc(100% - 100px);
+      background: lightblue;
+    }
+    .footer {
+      height: 40px;
+      background: lightpink;
+    }  */
+
+
+    /* flex */
+    /* .container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .header {
+      background: lightgreen;
+      height: 60px;
+    }
+    .main {
+      background: lightblue;
+      flex: 1 1 auto;
+    }
+    .footer {
+      background: lightpink;
+      height: 40px;
+    } */
+
+
+    /* grid */
+    /* .container {
+      height: 100%;
+      display: grid;
+      grid: 60px 1fr 40px / 1fr;
+    }
+    .header {
+      background: lightgreen;
+    }
+    .main {
+      background: lightblue;
+    }
+    .footer {
+      background: lightpink;
+    } */
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">header</div>
+    <div class="main">main</div>
+    <div class="footer">footer</div>
+  </div>
+</body>
+</html>
