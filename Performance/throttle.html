@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>throttle</title>
+</head>
+<body>
+  <script>
+    function throttle (fn, interval) {
+      // 上一次触发回调的时候
+      // 一开始为 0，表示会立刻触发回调
+      let last = 0
+
+      return function () {
+        // 保留调用时候的 this
+        let ctx = this
+        // 保留传入的参数
+        let args = arguments
+        // 记本次触发的时间
+        let now = +new Date()
+        
+        // 如果本次触发的时间与上一次触发的时间差大于间隔，就触发
+        if (now - last >= interval) {
+          fn.apply(ctx, args)
+          last = now
+        }
+      }
+    }
+    
+    var throttleClick = throttle(() => { console.log('throttle') }, 3000)
+
+    // window.addEventListener('click', throttleClick )
+
+    function debounce (fn, interval) {
+      // 定时器
+      let timer = null
+
+      return function () {
+        // 保存调用时候的 this
+        let ctx = this
+        // 保存传入参数
+        let args = arguments
+        
+        // 每次有事件触发的时候，要清理掉之前的定时器
+        if (timer) {
+          clearTimeout(timer)
+        }
+        timer = setTimeout(() => {
+          fn.apply(ctx, args)
+        }, interval)
+      }
+    }
+    var debounceClick = debounce(() => { console.log('debounce') }, 1000)
+    // window.addEventListener('click', debounceClick)
+
+    function throttle (fn, interval) {
+      let timer
+      let last = 0
+
+      return function () {
+        let ctx = this
+        let args = arguments
+        let now = +new Date()
+
+        if (now - last < interval) {
+          clearTimeout(timer)
+          timer = setTimeout(() => {
+            fn.apply(ctx, args)
+          })
+        } else {
+
+        }
+      }
+    }
+    function throttle(fn, delay) {
+      // 上一次触发回调的时间
+      let last = 0 
+      // 定时器
+      let timer = null
+      
+      return function () { 
+        // 保留调用时的this上下文
+        let context = this
+        // 保留调用时传入的参数
+        let args = arguments
+        // 记录本次触发回调的时间
+        let now = +new Date()
+        
+        // 判断上次触发的时间和本次触发的时间差是否小于时间间隔的阈值
+        clearTimeout(timer) // 考虑到可能设置定时后，又过了阈值调用回调函数，要清除定时器。
+        if (now - last < delay) {
+        // 如果时间间隔小于我们设定的时间间隔阈值，则为本次触发操作设立一个新的定时器
+          timer = setTimeout(function () {
+              last = now
+              fn.apply(context, args)
+            }, delay)
+        } else {
+            // 如果时间间隔超出了我们设定的时间间隔阈值，那就不等了，无论如何要反馈给用户一次响应
+            last = now
+            fn.apply(context, args)
+        }
+      }
+    }
+var throttleClick = throttle(() => { console.log('throttle') }, 3000)
+
+    window.addEventListener('click', throttleClick )
+  </script>
+</body>
+</html>

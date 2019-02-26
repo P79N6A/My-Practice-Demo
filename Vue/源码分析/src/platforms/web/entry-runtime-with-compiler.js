@@ -34,6 +34,8 @@ Vue.prototype.$mount = function (
 
   const options = this.$options
   // resolve template/el and convert to render function
+  // 如果没有自己定义 render function 的话，又有 template 的话
+  // 会根据 template 创建 render function
   if (!options.render) {
     let template = options.template
     if (template) {
@@ -59,6 +61,7 @@ Vue.prototype.$mount = function (
     } else if (el) {
       template = getOuterHTML(el)
     }
+
     if (template) {
       /* istanbul ignore if */
       if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
@@ -66,14 +69,15 @@ Vue.prototype.$mount = function (
       }
 
       // 把 template 转为 render function
-      // 设置 options.render = render
       const { render, staticRenderFns } = compileToFunctions(template, {
         shouldDecodeNewlines,
         shouldDecodeNewlinesForHref,
         delimiters: options.delimiters,
         comments: options.comments
       }, this)
+      // 设置 options.render = render
       options.render = render
+      // 标志静态渲染函数
       options.staticRenderFns = staticRenderFns
 
       /* istanbul ignore if */

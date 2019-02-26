@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>赛飞奇卡片懒加载</title>
+  <style>
+    html, body {
+      padding: 0;
+      margin: 0;
+    }
+    .container {
+      
+    }
+    .header {
+      height: 60px;
+      background: lightblue;
+    }
+    .content {
+      height: 500px;
+    }
+    .aside {
+      float: left;
+      width: 200px;
+      background: lightyellow;
+      height: 100%;
+    }
+    .main {
+      margin-left: 200px;
+      background: lightgreen;
+      height: 100%;
+      overflow: auto;
+    }
+    .card {
+      height: 200px;
+      width: 300px;
+      float: left;
+      background: lightpink;
+      margin: 10px 0 0 10px;
+    }
+    .card.show {
+      background: lightgrey;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header"></div>
+    <div class="content">
+      <div class="aside"></div>
+      <div class="main">
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    window.onload = function () {
+      // 先填充，数据渲染只渲染出现在视口的
+      // 需求：分块的，每块里面有若干个卡片，卡片的高度不一，定时请求
+      // 想用文档碎片分时渲染，但是是定时请求的。
+      // 假设只有五个块
+
+      // 获取可视区域的高度
+      var viewHeight = window.innerHeight || document.documentElement.clientHeight
+
+      var main = document.getElementsByClassName('main')[0]
+      console.log(main.getBoundingClientRect())
+      var header = document.getElementsByClassName('header')[0]
+      console.log(header.getBoundingClientRect())
+
+
+      var card = document.getElementsByClassName('card')
+      for (var i = 0; i < card.length; i++) {
+        (function (i) {
+          console.log(card[i].getBoundingClientRect())
+          card[i].onclick = function () {
+            console.log(card[i].getBoundingClientRect())
+          }
+        })(i)
+      }
+
+      main.onscroll = function () {
+        for (var j = 0; j < card.length; j++) {
+          console.log(header.getBoundingClientRect())
+          if (card[j].getBoundingClientRect().top - header.getBoundingClientRect().height < main.getBoundingClientRect().height) {
+            card[j].className = 'card show'
+          } else {
+            card[j].className = 'card'
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>

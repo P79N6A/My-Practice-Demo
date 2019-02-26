@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Storage</title>
+</head>
+<body>
+  <button id="btn1">add</button>
+  <button id="btn2">delete</button>
+  <script>
+    let db
+    const request = window.indexedDB.open('student_system', 2)
+    request.onsuccess = function (event) {
+      db = event.target.result
+      console.log("你打开了IndexDB")
+    }
+    request.onerror = function (error) {
+      console.log(error)
+    }
+    // 首次创建 or 更新数据库（一般来说是字段更新）
+    request.onupgradeneeded = function (event) {
+      db = event.target.result
+      let objectStore
+      // 要先判断是否有这个对象集合，如果不存在的话去读取，就会报错
+      if (!db.objectStoreNames.contains('system_info')) {
+        // 设置主键为 id，自动增加（之后就可以不用传这个参数了）
+        objectStore = db.createObjectStore('system_info', { keyPath: 'id', autoIncrement: true })
+      }
+    }
+
+    function add () {
+      // 构建事务来执行数据库操作（增删查改等）
+      const transaction = db.transaction(['system_info'], 'readwrite')
+      // 获取 object store 对象
+      const objectStore = transaction.objectStore('system_info')
+      // 添加
+      objectStore.add({
+        name: 'Lin'
+      })
+
+      // 操作成功时的监听函数
+      transaction.oncomplete = function (event) {
+        console.log('操作成功')
+      }
+      // 操作失败时的监听函数
+      transaction.onerror = function(event) {
+        console.log("error")
+      }
+    }
+
+    var btn1 = document.getElementById('btn1')
+    btn1.onclick = add
+  </script>
+</body>
+</html>

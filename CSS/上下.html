@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>上下</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+
+    /* 绝对定位 */
+    /* .container {
+      height: 100%;
+      position: relative;
+    }
+    .header {
+      height: 100px;
+      background: lightblue;
+    }
+    .main {
+      position: absolute;
+      top: 100px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: lightgreen;
+    } */
+
+
+    /* calc */
+    .container {
+      height: 100%;
+    }
+    .header {
+      height: 100px;
+      background: lightblue;
+    }
+    .main {
+      height: calc(100% - 100px);
+      background: lightgreen;
+    } 
+
+
+    /* flex */
+    /* .container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .header {
+      height: 100px;
+      background: blue;
+    }
+    .main {
+      background: red;
+      flex: 1 1 auto;
+    } */
+
+
+    /* grid */
+    /* .container {
+      height: 100%;
+      display: grid;
+      grid: 100px 1fr / 1fr;
+    }
+    .header {
+      background: blue;
+    }
+    .main {
+      background: red;
+    } */
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">header</div>
+    <div class="main">main</div>
+  </div>
+</body>
+</html>

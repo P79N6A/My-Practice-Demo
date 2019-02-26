@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>水平垂直居中</title>
+  <style>
+    /* 行内 */
+    /* .container { */
+      /* 垂直居中 */
+      /* height: 100px; */
+      /* line-height: 100px; */
+      /* 水平居中 */
+      /* text-align: center; */
+    /* } */
+
+    /* table-cell */
+    /* .container {
+      height: 100px;
+      width: 200px;
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+    } */
+
+
+    /* 绝对定位 */
+    /* margin */
+    /* .container {
+      height: 500px;
+      position: relative;
+    }
+    .main {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      height: 200px;
+      width: 200px;
+      margin: -100px 0 0 -100px;
+      background: lightblue;
+    } */
+
+    /* transform */
+    /* .container {
+      height: 500px;
+      position: relative;
+    }
+    .main {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    } */
+
+    /* top bottom */
+    /* .main {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+    } */
+
+    /* flex */
+    /* .container {
+      height: 500px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    } */
+
+
+    /* grid */
+    /* .container {
+      height: 500px;
+      display: grid;
+      justify-content: center;
+      align-content: center;
+    } */
+
+
+    /* 视窗 */
+    .container {
+      /* 
+        margin-top 距离 50vh 就好啦
+        如果 0 去掉，则会有滚动条，因为这样的话 margin-bottom 也需要 50vh 
+      */
+      margin: 50vh auto 0;
+      transform: translateY(-50%);
+    }
+  </style>
+</head>
+<body>
+  <!-- 行内 -->
+  <!-- <div class="container">
+    <span>永不失联的爱。</span>
+  </div> -->
+
+  <!-- 块级 -->
+  <div class="container">
+    <div class="main">123</div>
+  </div>
+</body>
+</html>

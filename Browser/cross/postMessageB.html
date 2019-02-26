@@ -1,0 +1,26 @@
+<!DO  CTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>B</title>
+</head>
+<body>
+  123
+  <button id="btn">send to A</button>
+  <script>
+    window.onload = function () {
+      var btn = document.getElementById('btn')
+      btn.onclick = function () {
+        top.postMessage('i am b, hello a', 'http://localhost:3344')
+      }
+
+      window.addEventListener('message', function (event) {
+        console.log(event.data)
+        // event.source.postMessage('hi a', 'http://localhost:3344')
+      })
+    }
+  </script>
+</body>
+</html>

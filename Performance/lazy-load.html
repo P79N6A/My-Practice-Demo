@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>lazy load</title>
+  <style>
+    .img {
+      width: 300px;
+      height: 300px;
+      background: grey;
+      float: left;
+      margin: 10px 10px 0 0;
+    }
+    .pic {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    var fragment = document.createDocumentFragment()
+    for (var i = 1; i <= 40; i++) {
+      fragment.appendChild(createImg(i))
+    }
+    document.body.appendChild(fragment)
+
+
+    function createImg (i) {
+      var div = document.createElement('div')
+      var pic = document.createElement('img')
+      div.className = 'img'
+      div.appendChild(pic)
+      pic.className = 'pic'
+      pic.alt = '加载中'
+      pic.setAttribute('data-src', 'D:\My\\bgImg\\' + i + '.jpg')
+
+      return div
+    }
+
+    setTimeout(lazyLoad, 1000)
+
+    // 获取所有图片
+    var imgs = document.getElementsByClassName('pic')
+    // 获取可视区域的高度
+    // window.innerHeight：IE9+ 以及其他浏览器
+    // document.documentElement.clientHeight：低版本 IE
+    var viewHeight = window.innerHeight || document.documentElement.clientHeight
+    // 获取当前已经展示的图片数目，避免从头开始展示
+    var num = 0
+    function lazyLoad () {
+      for (var i = sum; i < imgs.length; i++) {
+        var top = imgs[i].getBoundingClientRect().top
+        if (top < viewHeight) {
+          imgs[i].src = imgs[i].getAttribute('data-src')
+          num++
+        }
+      }
+    }
+
+    window.onscroll = lazyLoad
+  </script>
+</body>
+</html>

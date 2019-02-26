@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ajax</title>
+</head>
+<body>
+  <!-- 表单提交 -->
+  <form id="form" action="http://localhost:7788" method="POST">
+    <input name="username" type="text" />
+    <input name="password" type="password" />
+
+    <input type="radio" id="male" name="sex" value="male" checked/>
+    <label for="male">男</label>
+
+    <input type="radio" id="female" name="sex" value="female" />
+    <label for="female">女</label>
+
+    <input type="checkbox" id="badminton" name="hobby" value="badminton" />
+    <label for="badminton">羽毛球</label>
+
+    <input type="checkbox" id="basketball" name="hobby" value="basketball" />
+    <label for="basketball">篮球</label>
+
+    <input type="file" id="file" name="file" value="上传文件" />
+
+    <button id="button">submit</button>
+  </form>
+
+
+  <!-- xhr 提交 -->
+  <form id="form">
+    <input name="username" type="text" />
+    <input name="password" type="password" />
+
+    <input type="radio" id="male" name="sex" value="male" checked/>
+    <label for="male">男</label>
+
+    <input type="radio" id="female" name="sex" value="female" />
+    <label for="female">女</label>
+
+    <input type="checkbox" id="badminton" name="hobby" value="badminton" />
+    <label for="badminton">羽毛球</label>
+
+    <input type="checkbox" id="basketball" name="hobby" value="basketball" />
+    <label for="basketball">篮球</label>
+
+    <input type="file" id="file" name="file" value="上传文件" />
+
+    <button id="button">submit</button>
+  </form>
+  <!-- <script>
+    function ajax (url, mothod, data, cb) {
+      var xhr = new XMLHttpRequest()
+      xhr.open(mothod, url)
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+      // xhr.setRequestHeader('Content-Type', 'multipart/form-data')
+      xhr.send(data)
+      xhr.onreadystatechange = function () {
+        // 收到服务器的响应
+        if (xhr.readyState === 4) {
+          // 响应的状态码为 200
+          if (xhr.status === 200) {
+            console.log('收到啦')
+            console.log(xhr.responseText)
+            console.log(xhr.responseXML)
+          }
+        }
+      }
+    }
+    
+    var form = document.getElementById('form')
+    
+    var btn = document.getElementById('button')
+    btn.addEventListener('click', function (event) {
+      event.preventDefault()
+      // console.log(form)
+
+      // GET 提交，拼接成查询字符串
+      var queryString = '?'
+      var formElements = form.elements
+      for (var i = 0, len = formElements.length; i < len; i++) {
+        var elem = formElements[i]
+        if (elem.tagName.toLowerCase() === 'input') {
+          if (elem.name && elem.value) {
+            var value
+            // 单选框或复选框
+            if (elem.type === 'radio' || elem.type === 'checkbox') {
+              // 是否被选中
+              if (elem.checked) {
+                value = elem.value
+              } else {
+                continue
+              }
+            }
+            if (!value) {
+              value = elem.value
+            }
+            // 拼接查询字符串
+            queryString += elem.name + '=' + value + '&'
+          }
+        }
+      }
+      // 移除掉最后多加的 &
+      var queryString = queryString.slice(0, queryString.length - 1)
+      ajax(
+        'http://localhost:7788' + queryString,
+        'GET',
+        null,
+        cb
+      )
+
+      // POST 提交，形成对象
+      // var requestData = {}
+      // // 遍历表单元素
+      // var formElements = form.elements
+      // for (var i = 0, len = formElements.length; i < len; i++) {
+      //   var elem = formElements[i]
+      //   if (elem.tagName.toLowerCase() === 'input') {
+      //     if (elem.type === 'radio') {
+      //       if (elem.checked) {
+      //         requestData[elem.name] = elem.value
+      //       }
+      //       continue
+      //     }
+
+      //     if (elem.name && elem.value) {
+      //       requestData[elem.name] = elem.value
+      //     }
+      //   }
+      // }
+
+      // ajax(
+      //   'http://localhost:7788',
+      //   'POST',
+      //   JSON.stringify(requestData),
+      //   cb
+      // )
+
+
+      // FormData 对象
+      // var form = new FormData(document.getElementById('form'))
+      // ajax(
+      //   'http://localhost:7788',
+      //   'POST',
+      //   form,
+      //   cb
+      // )
+    })
+
+    function cb (data) {
+      console.log('获得返回的数据：' + data)
+    }
+
+  </script> -->
+</body>
+</html>

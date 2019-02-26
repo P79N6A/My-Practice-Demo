@@ -13,6 +13,10 @@ class Foo {
   static get a () {
     return 'a'
   }
+
+  get b () {
+    return 'b'
+  }
 }
 Foo.staticProp = 100
 

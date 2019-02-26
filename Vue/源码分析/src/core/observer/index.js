@@ -41,7 +41,7 @@ export class Observer {
 
   constructor (value: any) {
     this.value = value
-    // 这个是用来干嘛的？
+    // 存放对这个对象的 watcher
     this.dep = new Dep()
     this.vmCount = 0
     // 给被观察对象/数组添加上 __ob__ 属性，指向当前 observer

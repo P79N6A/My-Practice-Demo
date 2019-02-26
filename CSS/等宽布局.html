@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>等宽布局</title>
+  <style>
+    html, body {
+      margin: 0;
+    }
+
+    /* float + padding */
+    /* .container {
+      margin-left: -10px; 
+    }
+    .column {
+      float: left;
+      width: 25%;
+      padding-left: 10px;
+      box-sizing: border-box;
+      background-clip: content-box;
+    }
+    .column:nth-child(odd) {
+      background-color: lightblue;
+    }
+    .column:nth-child(even) {
+      background-color: lightyellow;
+    } */
+
+
+    /* float + calc */
+    /* .container {
+      margin-left: -10px;
+    }
+    .column {
+      float: left;
+      width: calc(25% - 10px);
+      margin-left: 10px;
+    }
+    .column:nth-child(odd) {
+      background-color: lightblue;
+    }
+    .column:nth-child(even) {
+      background-color: lightyellow;
+    } */
+
+
+    /* float + margin + (fix) */
+    /* .container {
+      margin-left: -10px; 
+    }
+    .column-fix {
+      float: left;
+      width: 25%;
+    }
+    .column {
+      margin-left: 10px;
+    }
+    .column-fix:nth-child(odd) .column {
+      background: lightblue;
+    }
+    .column-fix:nth-child(even) .column {
+      background: lightyellow;
+    } */
+
+
+    /* table */
+    .container {
+      height: 540px;  /*抵消上下边20*2间距的高度影响*/
+      display: table;
+      margin: -20px 0;  /*抵消上下边20*2间距的位置影响*/
+      /*两边离页面间距较大,改用子元素设置padding来当成间隔就不会有这样的问题*/
+      border-spacing: 20px;  /*设置间距*/
+    }
+    .column{
+        display: table-cell;
+    }
+    .column:nth-child(odd){
+        background-color: #f00;
+    }
+    .column:nth-child(even){
+        background-color: #0f0;
+    }
+
+
+
+    /* flex */
+    /* .container {
+      display: flex;
+      margin-left: -10px; 
+    }
+    .column {
+      flex: 1;
+    }
+    .container div {
+      margin-left: 10px;
+    }
+    .column:nth-child(odd) {
+      background: lightblue;
+    }
+    .column:nth-child(even) {
+      background: lightyellow;
+    } */
+
+
+    /* grid */
+    /* .container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-column-gap: 10px;
+    }
+    .column:nth-child(odd) {
+      background: lightblue;
+    }
+    .column:nth-child(even) {
+      background: lightyellow;
+    } */
+
+  </style>
+</head>
+<body>
+  <!-- 等宽布局，中间有缝隙 10px，假设是四列 -->
+  <div class="container">
+    <div class="column">1</div>
+    <div class="column">2</div>
+    <div class="column">3</div>
+    <div class="column">4</div>
+  </div>
+
+  <!-- float + margin + fix -->
+  <!-- <div class="container">
+    <div class="column-fix">
+      <div class="column">1</div>
+    </div>
+    <div class="column-fix">
+      <div class="column">2</div>
+    </div>
+    <div class="column-fix">
+      <div class="column">3</div>
+    </div>
+    <div class="column-fix">
+      <div class="column">4</div>
+    </div>
+  </div> -->
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>垂直居中</title>
+  <style>
+    html, body {
+      padding: 0;
+      margin: 0;
+    }
+    /* .container {
+      height: 200px;
+      line-height: 200px;
+      font-size: 0;
+    }
+    .pic {
+      vertical-align: middle;
+    } */
+
+    /* table */
+    /* .container {
+      height: 100px;
+      display: table-cell;
+      vertical-align: middle;
+    } */
+
+    /* 绝对定位 */
+    /* .container {
+      position: relative;
+      height: 100px;
+    }
+    .main {
+      position: relative;
+      height: 40px;
+      top: 50%;
+      margin-top: -20px;
+    } */
+
+    /* 绝对定位的那个 top bottom 的原理 */
+    /* .container {
+      position: absolute;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      height: 100px;
+      background: lightblue;
+    } */
+
+
+    /* flex */
+    /* .container {
+      height: 500px;
+      display: flex;
+      align-items: center;
+    } */
+
+    /* grid */
+    .container {
+      height: 500px;
+      display: grid;
+      align-content: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- <div class="container">
+    <img class="pic" src="./img/三列：左中定宽 右自适应.png"/>
+  </div> -->
+
+  <div class="container">
+    <div class="main">你好不好。</div>
+  </div>
+</body>
+</html>

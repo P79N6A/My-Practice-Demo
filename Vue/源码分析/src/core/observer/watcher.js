@@ -103,6 +103,7 @@ export default class Watcher {
    * Evaluate the getter, and re-collect dependencies.
    */
   get () {
+    // 设置 Dep.target = this
     pushTarget(this)
     let value
     const vm = this.vm
@@ -148,15 +149,15 @@ export default class Watcher {
    */
   cleanupDeps () {
     let i = this.deps.length
-    // 遍历旧的 deps，移除到新的中没有的 deps
-    // 形成的就是现在新的 deps
-    // 这个新的 deps 在下次依赖收集的时候就是旧的 deps 了
+    // 遍历旧的 deps，移除到新的中没有的 dep 中关于这个 watcher 的订阅
     while (i--) {
       const dep = this.deps[i]
       if (!this.newDepIds.has(dep.id)) {
         dep.removeSub(this)
       }
     }
+    // 把现在的 deps 设置为旧的 deps
+    // 把现在的 deps 清空
     let tmp = this.depIds
     this.depIds = this.newDepIds
     this.newDepIds = tmp

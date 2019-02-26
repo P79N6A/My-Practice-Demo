@@ -102,7 +102,7 @@ export function _createElement (
   if (typeof tag === 'string') {
     let Ctor
     ns = (context.$vnode && context.$vnode.ns) || config.getTagNamespace(tag)
-    // 如果是保留标签
+    // 如果是保留标签（也就是浏览器的标签）
     if (config.isReservedTag(tag)) {
       // platform built-in elements
       // 创建 vnode，它已经有它的 child 了
@@ -111,9 +111,9 @@ export function _createElement (
         undefined, undefined, context
       )
     } else if ((!data || !data.pre) && isDef(Ctor = resolveAsset(context.$options, 'components', tag))) {
+      // 如果是组件
       // resolveAsset() 会获取组件的构造
       // 其实就是在导出组件时候的对象 export default {}
-      // component
       vnode = createComponent(Ctor, data, context, children, tag)
     } else {
       // unknown or unlisted namespaced elements
@@ -128,6 +128,7 @@ export function _createElement (
     // direct component options / constructor
     vnode = createComponent(tag, data, context, children)
   }
+  
   if (Array.isArray(vnode)) {
     return vnode
   } else if (isDef(vnode)) {
