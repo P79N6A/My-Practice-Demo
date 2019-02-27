@@ -21,7 +21,7 @@
       var btn = document.getElementById('btn')
       btn.onclick = function () {
         var xhr = new XMLHttpRequest()
-        xhr.open('get', '/api')
+        xhr.open('post', 'http://localhost:3304/api')
         xhr.send()
         xhr.onreadystatechange = function () {
           console.log(xhr)
