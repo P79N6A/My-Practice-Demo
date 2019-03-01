@@ -1,27 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>test</title>
   <style>
-    .container, .main {
+    html, body {
+      margin: 0;
+      height: 100%;
+      
+    }
+    /* .container {
+      width: 200px;
+      background: lightpink;
       height: 100px;
+      line-height: 100px;
+      
+    } */
+    /* .phat {
+      display: inline-block;
+      height: 100px;
+      vertical-align: middle;
+    } */
+    body {
+      /* display: table; */
     }
+    
     .container {
-      width: 100px;
-      box-sizing: border-box;
-      padding: 0 20px;
-    }
-    .main {
-      width: 100%;
-    }
+    text-align: center;
+    line-height: 300px;
+    width: 100%;
+    height: 300px;
+    background-color: #ccc;
+    font-size: 0;
+}
+
+span {
+    line-height: normal;
+    display: inline-block;
+    vertical-align: middle;
+    background-color: #333;
+    font-size: 18px;
+    /* padding: 10px; */
+    width: 360px;
+    color: #fff;
+}
+    
+
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="main"></div>
+    <span>外部 height = line-height, IFC 布局，display:inline-block、text-align:center和vertical-align:middle方法来实现文本垂直居中 inline-block 元素以单个封闭块来参与外部的IFC，其内部会生成一个BFC，不在本例讨论范围之内。</span>
+    <span>123</span>
   </div>
+
+  <!-- <div class="container">
+    <div class="inner">3333</div>
+  </div> -->
 </body>
+
 </html>

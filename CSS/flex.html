@@ -9,14 +9,15 @@
     .container {
       display: flex;
       height: 100px;
-      justify-content: space-around;
-      flex-wrap: wrap;
+      flex-wrap: wrap-reverse;
+      width: 300px;
       /* flex-direction: column; */
     }
     .container > div {
-      width: 200px;
+      width: 100px;
       height: 40%;
       background: pink;
+      flex-shrink: 1;
     }
   </style>
 </head>
