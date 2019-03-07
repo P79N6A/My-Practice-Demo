@@ -1,58 +1,97 @@
-// var p  = Promise.resolve(1)
-// p.then(v => console.log(v))
-// console.log(p)
+// // 对象
+// // 浅拷贝
+// var o = {}
+// var obj = {}
+// o = { obj }
+// obj = {
+//   a: 1,
+//   b: undefined,
+//   get c () {
+//     return 'c'
+//   },
+//   d: o
+//   // e: Symbol.for('e'),
+//   // f: function () {
+//   //   return 'f'
+//   // }
+// };
+// o.obj = obj;
+
+// // 1. 遍历
+// (function () {
+//   var newObj = {}
+//   for (var key in obj) {
+//     if (obj.hasOwnProperty(key)) {
+//       newObj[key] = obj[key]
+//     }
+//   }
+//   console.log(newObj)
+// })();
+
+// // // 2. Object.assign
+// (function () {
+//   var newObj = Object.assign({}, obj)
+//   console.log(newObj)
+// }());
+
+// // 3. ...扩展运算符
+// (function () {
+//   var newObj = {...obj}
+//   console.log(newObj)
+// }());
 
 
-// 对象判空
-// 1. 用 for...in
+// 深拷贝
+var o = {}
 var obj = {}
-function objectIsEmpty (obj) {
-  for (var key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      return false
+o = { obj }
+obj = {
+  // a: 1,
+  // b: undefined,
+  // get c () {
+  //   return 'c'
+  // },
+  d: o
+  // e: Symbol.for('e'),
+  // f: function () {
+  //   return 'f'
+  // }
+};
+
+// 1. 深拷贝函数
+function deepClone (val) {
+  if (Array.isArray(val)) {
+    return val.map(deepClone)
+  } else if (val && typeof val == 'object') {
+    var obj = {}
+    for (var key in val) {
+      if (val.hasOwnProperty(key)) {
+        obj[key] = deepClone(val[key])
+      }
     }
+    return obj
+  } else {
+    return val
   }
-  return true
 }
-console.log(objectIsEmpty(obj))
+console.log(deepClone(obj))
 
-// 2. 用 Object.keys()
-function objectIsEmpty (obj) {
-  return Object.keys(obj).length === 0 ? true : false
-}
-console.log(objectIsEmpty(obj))
+// 2. JSON.parse
+// (function () {
+//   delete obj.d
+//   var newObj = JSON.parse(JSON.stringify(obj))
+//   console.log(newObj)
+// })();
 
-// 3. 用 JSON.stringify
-function objectIsEmpty (obj) {
-  return JSON.stringify(obj) === '{}' ? true : false
-}
-console.log(objectIsEmpty(obj))
+// 3. messageChannel：浏览器的 API
+// undefined、循环引用
+// ;(function () {
+//   var channel = new MessageChannel()
+//   delete obj.e
+//   channel.port1.postMessage(obj)
+//   channel.port2.onmessage = function (e) {
+//     console.log(e.data)
+//   }
+// })()
 
-// async
-async function async1(){
-  console.log('async1 start')
-  await async2()
-  console.log('async1 end')
-  await 3
-  console.log('hha?')
-}
-async function async2(){
-  console.log('async2')
-}
-Promise.resolve(2).then(r => console.log(r))
-async1();
-new Promise(function(resolve){
-  console.log('promise1')
-  resolve();
-}).then(function(){
-  console.log('promise2')
-})
-
-var p = new Promise((resolve, reject) => {
-  resolve(1)
-})
-var p1 = Promise.resolve('haha')
-var p2 = p.then(data => {
-  return p1
-})
-setTimeout(() => console.log(p1 === p2), 0) // Promise {<resolved>: "haha"}
+// 4. loadsh
