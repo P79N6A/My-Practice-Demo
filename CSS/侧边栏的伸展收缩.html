@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+    }
+    .container {
+      height: 100%;
+    }
+    .aside {
+      width: 200px;
+      height: 100%;
+      background: lightpink;
+      float: left;
+      transition: width 1s ease;
+    }
+    .container::after {
+      display: block;
+      content: '';
+      clear: both;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="aside"></aside>
+    <button class="btn">收缩</button>
+  </div>
+  <script>
+    window.onload = function () {
+      var aside = document.getElementsByClassName('aside')[0]
+      var btn = document.getElementsByClassName('btn')[0]
+      var isShow = true
+      btn.onclick = function () {
+        if (isShow) {
+          btn.innerText = '展开'
+          isShow = false
+          aside.style.width = '0px'
+        } else {
+          btn.innerText = '收缩'
+          isShow = true
+          aside.style.width = '200px'
+        }
+      }
+    }
+  </script>
+</body>
+</html>

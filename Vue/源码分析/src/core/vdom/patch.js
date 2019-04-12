@@ -164,6 +164,7 @@ export function createPatchFunction (backend) {
         }
       }
 
+      // 创建 vonode 对应的 dom 元素
       vnode.elm = vnode.ns
         ? nodeOps.createElementNS(vnode.ns, tag)
         : nodeOps.createElement(tag, vnode)
@@ -182,19 +183,22 @@ export function createPatchFunction (backend) {
           }
           insert(parentElm, vnode.elm, refElm)
         }
-        // 创建当前 vnode 的 children 对应的 dom 元素，并插入
+        
         createChildren(vnode, children, insertedVnodeQueue)
         if (appendAsTree) {
           if (isDef(data)) {
             invokeCreateHooks(vnode, insertedVnodeQueue)
           }
+          
           insert(parentElm, vnode.elm, refElm)
         }
       } else {
+        // 创建当前 vnode 的 children 对应的 dom 元素，并插入
         createChildren(vnode, children, insertedVnodeQueue)
         if (isDef(data)) {
           invokeCreateHooks(vnode, insertedVnodeQueue)
         }
+        // 将刚创建的 DOM 元素插入到 parentElm 中，在 refElm 之前
         insert(parentElm, vnode.elm, refElm)
       }
 
@@ -777,6 +781,8 @@ export function createPatchFunction (backend) {
         const parentElm = nodeOps.parentNode(oldElm)
 
         // create new node
+        // 调用这个函数，创建 vnode tree 对应的 dom tree
+        // 并将 dom 的根元素插入到 parentElm 中，在 oleElm 的兄弟节点之前。
         createElm(
           vnode,
           insertedVnodeQueue,

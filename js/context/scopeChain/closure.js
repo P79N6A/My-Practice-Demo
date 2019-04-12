@@ -13,19 +13,51 @@
 // k()
 
 
-var c = 1
-function foo () {
-  var a = 1
+// var c = 1
+// function foo () {
+//   var a = 1
 
-  function bar () {
-    var b 
-    console.log(b)
-    console.log(c)
-    b = 10
-    console.log(a)
+//   function bar () {
+//     var b 
+//     console.log(b)
+//     console.log(c)
+//     b = 10
+//     console.log(a)
+//   }
+
+//   return bar
+// }
+// var k = foo()
+// k()
+
+
+// 1. 定义私有属性
+function person () {
+  var name = 'haha'
+
+  function getName () {
+    return name
+  }
+  function setName (newName) {
+    name = newName
   }
 
-  return bar
+  return {
+    getName,
+    setName
+  }
 }
-var k = foo()
-k()
+
+var p = person()
+console.log(p.getName())
+p.setName('xixi')
+console.log(p.getName())
+
+// 2. setTimeout
+for (var i = 0; i < 5; i++) {
+  (function (i) {
+    setTimeout(function () {
+      console.log(i)
+    }, i * 1000)
+  })(i)
+}

@@ -9,21 +9,28 @@
 <body>
   <div id="box">
     <button id="btn">click</button>
+    <input id="input"/>
+    <a href="#" id="link">#</a>
   </div>
 
   <script>
     var box = document.getElementById('box')
     var btn = document.getElementById('btn')
+    var link = document.getElementById('link')
 
+    link.addEventListener('click', function (e) {
+      console.log(e)
+      return false
+    })
     // 目标对象上的触发，按照注册的先后顺序执行
-    // btn.addEventListener('click', () => console.log('bubble'), false)
-    // btn.addEventListener('click', () => console.log('capture'), true)
+    btn.addEventListener('click', () => console.log('bubble'), false)
+    btn.addEventListener('click', () => console.log('capture'), true)
 
     // 非目标对象上的触发，对于同一元素，按照事件传播顺序，再按注册顺序触发。
-    // box.addEventListener('click', () => console.log('bubble1'), false)
-    // box.addEventListener('click', () => console.log('bubble2'), false)
-    // box.addEventListener('click', () => console.log('capture1'), true)
-    // box.addEventListener('click', () => console.log('capture2'), true)
+    box.addEventListener('click', () => console.log('bubble1'), false)
+    box.addEventListener('click', () => console.log('bubble2'), false)
+    box.addEventListener('click', () => {console.log('capture1');}, true)
+    box.addEventListener('click', () => console.log('capture2'), true)
 
     // onevent 注册事件 DOM 0
     // btn.onclick = () => { console.log('first') }
@@ -73,10 +80,22 @@
 
 
     // HTML5 事件
-    document.addEventListener('contextmenu', (e) => {
-      console.log(e)
-      e.preventDefault()
+    // document.addEventListener('contextmenu', (e) => {
+    //   console.log(e)
+    //   e.preventDefault()
+    // })
+
+
+    // 监听不能冒泡的事件
+    var input = document.getElementById('input')
+    input.addEventListener('focus', function (e) {
+      console.log('123')
+    }, false)
+    box.addEventListener('focus', function (e) {
+      console.log('box focus')
     })
+
+    document.addEventListener('click', function () {})
   </script>
 </body>
 </html>

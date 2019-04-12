@@ -190,16 +190,53 @@ console.log(arr.reduce((accumulator, curr, index, arr) => {
 
 
 // 数组去重
+// 1. 双层遍历
+var array = [3, 1, 2, '3', 1]
+function unique (arr) {
+  // 存放结果
+  var res = []
+  for (var i = 0, arrLen = arr.length; i < arrLen; i++) {
+    for (var j = 0, resLen = res.length; j < resLen; j++) {
+      if (arr[i] === arr[j]) {
+        break
+      }
+    }
+    // 如果 arr[i] 是唯一的，那么说明没有退出循环
+    // 此时 j 为 len
+    if (j === len) {
+      res.push(arr[i])
+    }
+  }
+  return res
+}
+console.log(unique(array))
+
+
+// 1. 遍历
 var obj = {}
-var arr = [1, 1, 2, 2, 3, 3, 4]
+var arr = [1, 1, 4, 2, 3, 4, '3']
 arr.forEach(item => {
-  if (obj[item]) {
-    obj[item]++
-  } else {
-    obj[item] = 1
+  obj[item] ? obj[item]++ : obj[item] = 1
+})
+var newArr = []
+for (var key in obj) {
+  newArr.push(+key)
+}
+console.log(newArr)
+
+// 2. 排序后去重
+var arr = [1, 1, 4, 2, 3, 4, '3']
+arr.sort()
+var newArr = arr.filter((item, index) => {
+  if (index != arr.length - 1) {
+    return item !== arr[index + 1]
   }
 })
-console.log(obj)
+console.log(newArr)
 
+// 3. 利用 Set 的特性
 var arr = [1, 1, 2, 2, 3, 3, 4]
 var set = Array.from(new Set(arr))
+var set = [...new Set(arr)]
+
+

@@ -1,15 +1,16 @@
 import React from 'react'
 // import Tacos from './Tacos'
 import { Route, Link } from 'react-router-dom'
-import About from './About'
-import Message from './Message'
-import Param from './Param'
+// import About from './About'
+// import Message from './Message'
+// import Param from './Param'
 // import Recursive from './Recursive'
-import RouteConfig from './RouteConfig'
+// import RouteConfig from './RouteConfig'
+import Home from './Home.js'
 
 const App = () => (
   <div>
-    <ul>
+    {/* <ul>
       <li><Link to="/about">about</Link></li>
       <li><Link to="/message">message</Link></li>
       <li><Link to="/param">param</Link></li>
@@ -18,9 +19,14 @@ const App = () => (
       <Route path="about" component={About}></Route>
       <Route path="/message" component={Message}></Route>
       <Route path="/param" component={Param}></Route>
-    </div>
+    </div> */}
     {/* <Recursive></Recursive> */}
-    <RouteConfig></RouteConfig>
+    {/* <RouteConfig></RouteConfig> */}
+
+    <ul>
+      <li><Link to="/home">Link</Link></li>
+    </ul>
+    <Route path="/home" component={Home}></Route>
   </div>
 )
 

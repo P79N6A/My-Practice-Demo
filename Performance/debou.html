@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <button id="btn">按钮</button>
+  <script>
+    var btn = document.getElementById('btn')
+    btn.onclick = debounce(() => {
+      console.log('haha')
+    }, 1000)
+
+    // 简单原理版
+    function debounce (fn, delay) {
+      let timer = null
+      return function () {
+        let args = arguments
+        if (timer) {
+          clearTimeout(timer)
+        }
+        timer = setTimeout(() => {
+          fn.apply(this, args)
+          timer = null
+        }, delay)
+      }
+    }
+
+    // 考虑到可能一直不触发
+    function debounce (fn, delay) {
+      let last = 0
+      let timer = null
+      return function () {
+        let args = arguments
+        let now = +new Date()
+        if (now - last >= delay) {
+          fn.apply(this, args)
+          last = now
+        } else {
+          if (timer) {
+            clearTimeout(timer)
+          }
+          timer = setTimeout(() => {
+            fn.apply(this, args)
+            timer = null
+            last = now
+          }, delay)
+        }
+      }
+    }
+  </script>
+</body>
+</html>

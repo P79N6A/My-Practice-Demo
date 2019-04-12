@@ -1,35 +1,25 @@
-setTimeout(() => {
-  console.log(0)
-})
+// function async1 () {
+//   return new Promise(resolve => {
+//     console.log('a1 start')
+//     // 这里模拟 await 后面的表达式的执行
+//     // Promise.resolve(undefined) 相当于 async 调用后的结果
+//     // 这里其实等同于 await Promise.resolve(undefined)
+//     resolve(Promise.resolve(undefined))
+//   }).then(data => {
+//     console.log('a1 end')
+//   })
+// }
 
-new Promise(resolve => {
-  resolve(1)
-  Promise.resolve().then(t => {
-    console.log(2)
-    new Promise(resolve => {
-      resolve(6)
-    })
-    .then(t => {
-      console.log(t)
-    })
-  })
-  console.log(3)
-})
-.then(t => {
-  console.log(t)
-})
-
-console.log(5)
-
-
-var sendBtn = document.getElementsByClassName('input-send j_input-send')[0]
-var sendTextInput = document.getElementsByClassName('input-box j_input-box input-box_free')[0]
-
-function sendTv (msg) {
-  sendTextInput.value = msg
-  sendBtn.click()
+async function async1 () {
+  console.log('a1 start')
+  await 1
+  console.log('a1 end')
 }
 
-var setTag = setInterval(() => {
-  sendTv('浩克最棒~')
-}, 2000)
+async1()
+console.log(2)
+new Promise((resolve) => {
+  resolve(1)
+}).then(data => {
+  console.log('p end')
+})

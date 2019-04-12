@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <input type="file" value="文件上传" id="input">
+  <button id="btn">获取文件数量</button>
+  <script>
+    var btn = document.getElementById('btn')
+    btn.onclick = function () {
+      var files = document.getElementById('input').files || {}
+      console.log(files)
+      for (let i = 0, len = files.length; i < len; i++) {
+        let reader = new FileReader()
+        reader.onload = function (data) {
+          console.log(data.target.result)
+        }
+        reader.readAsDataURL(files[i])
+      }
+    }
+  </script>
+</body>
+</html>
