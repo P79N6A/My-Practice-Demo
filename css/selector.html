@@ -35,7 +35,16 @@
 
   <!-- 测试属性选择器 -->
   <style>
+    /* div[class] {
+      color: blue;
+    } */
+    /* div[class="middle"] {
+      color: blue;
+    } */
     
+    div[class~="middle"] {
+      color: red
+    }
   </style>
 </head>
 <body>
@@ -96,10 +105,15 @@
     123
   </div> -->
 
-  <p>1111</p>
+  <!-- 测试 first-child -->
+  <!-- <p>1111</p>
   <div>
     <p>2222</p>
     <span>3333</span>
-  </div>
+  </div> -->
+
+  <!-- 测试属性选择器 -->
+  <div class="middleaside">不匹配</div>  
+  <div class="middle aside">匹配</div>
 </body>
 </html>

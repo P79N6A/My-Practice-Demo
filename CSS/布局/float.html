@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>float</title>
+    <style>
+      .outer {
+        /* overflow: auto; */
+      }
+      .float-box {
+        background: black;
+        height: 200px;
+        width: 200px;
+        float: left;
+        /* clear: left; */
+      }
+      .other-box {
+        background: red;
+        height: 100px;
+        width: 300px;
+        /* clear: both; */
+        /* float: left; */
+        /* overflow: auto; */
+        /* float: left; */
+        /* clear: both; */
+      }
+      .clear {
+        clear: both;
+        height: 0;
+        line-height: 0;
+        font-size: 0;
+      }
+
+      .other1-box {
+        float: left;
+        width: 100px;
+        height: 100px;
+        background: blue;
+      }
+      
+      .clear-fix::after {
+        display: block; /* 不能是 inline/inline-block，因为浮动的初衷就是为了让内联级别的元素围绕浮动元素 */
+        content: ''; /* 必须要有个 content，这个伪元素才会显示在 DOM 上 */
+        clear: both;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="outer clear-fix">
+      <div class="other-box"></div>
+      <div class="float-box"></div>
+      <!-- <div class="other1-box"></div> -->
+      <!-- <div class="clear"></div> -->
+    </div>
+    <div>123</div>
+  </body>
+</html>

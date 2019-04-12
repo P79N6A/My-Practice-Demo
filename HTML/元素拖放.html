@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>元素拖放</title>
+  <style>
+    .box {
+      height: 100px;
+      width: 100px;
+      border: 1px solid blue;
+    }
+    .target-box {
+      height: 300px;
+      width: 300px;
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <div class="box" draggable="true">123</div>
+
+  <div class="target-box"></div>
+  <script>
+    var box = document.getElementsByClassName('box')[0]
+    var targetBox = document.getElementsByClassName('target-box')[0]
+
+    box.ondragstart = function (e) {
+      console.log(e)
+      console.log('开始拖拽')
+      e.dataTransfer.setData('hah', 'xixixi')
+      e.dataTransfer.dropEffect = 'move'
+    }
+    // box.ondrag = function (e) {
+    //   console.log('拖拽ing')
+    // }
+    // box.ondragend = function (e) {
+    //   console.log('拖拽结束')
+    // }
+    targetBox.ondragenter = function (e) {
+      e.dataTransfer.dropEffect = 'move'
+      console.log(e)
+      console.log('有元素进来了')
+    }
+    targetBox.ondragover = function (e) {
+      // 因为默认会阻止拖放进来，所以要阻止
+      e.preventDefault()
+      console.log(e)
+      // console.log('over ing')
+    }
+    // targetBox.ondragleave = function (e) {
+    //   console.log('有元素出去了')
+    // }
+    // 需要 dragover 阻止了默认操作后才会触发
+    targetBox.ondrop = function (e) {
+      targetBox.appendChild(box)
+      console.log(e)
+      console.log('有元素在里面释放了')
+      console.log(e.dataTransfer.getData('hah'))
+    }
+  </script>
+</body>
+</html>

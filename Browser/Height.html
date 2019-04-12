@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>各种高度宽度属性辨析</title>
+  <style>
+    .container {
+      height: 100px;
+      width: 100px;
+      overflow-y: auto;
+      word-wrap: break-word;
+      margin: 20px;
+      padding: 20px;
+      border: 20px solid black;
+    }
+    .test {
+      height: 50px;
+      width: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="test"></div>
+    <!-- 反正就放很多字在这里面咯............................................................................................ -->
+  </div>
+  <script>
+    window.onload = function () {
+      var container = document.getElementsByClassName('container')[0]
+      console.log('height', container.style)
+      console.log('clientHeight', container.clientHeight)
+      console.log('scrollHeight', container.scrollHeight)
+      console.log('offsetHeight', container.offsetHeight)
+      console.log('screenHeight', container.screenHeight)
+
+      console.log('clientTop', container.clientTop)
+      console.log('offsetTop', container.offsetTop)
+
+      var testBox = document.getElementsByClassName('test')[0]
+      // console.log(testBox.getBoundingClientRect())
+      console.log(container.getBoundingClientRect())
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>图片懒加载</title>
+  <style>
+    body {
+      margin: 0;
+    }
+    .container {
+      height: 500px;
+      width: 800px;
+      overflow: auto;
+      margin: -10px 0 0 -10px;
+    }
+    .img-box {
+      /* width: 200px; */
+      float: left;
+      /* display: inline-block; */
+      width: 33%;
+      height: 33%;
+      box-sizing: border-box;
+      padding-top: 10px;
+      padding-left: 10px;
+    }
+    .img-box img {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div style="height: 200px;"></div>
+  <div class="container">
+  </div>
+  <script>
+    window.onload = function () {
+      var container = document.getElementsByClassName('container')[0]
+      // 添加空的 img 到 DOM 中
+      addImgToDom(container)
+      // 获取 container 的可视区域的高度（因为此时 padding 为 0，所以可当成可视区域的高）
+      var viewHeight = container.clientHeight
+      // 记录当前已经加载了的图片编号，避免重复加载
+      var count = 0
+      // 获取所有的图片
+      var imgs = document.getElementsByTagName('img')
+
+      imgLazyLoad()
+      container.onscroll = imgLazyLoad
+
+      function imgLazyLoad () {
+        for (var i = count, len = imgs.length; i < len; i++) {
+          var img = imgs[i]
+          // 获取元素距离它视口（浏览器视口）的 top
+          var top = img.getBoundingClientRect().top
+          // 获取容器距离它视口（浏览器视口）的 top
+          var containerTop = container.getBoundingClientRect().top
+          // 获取元素相对于它容器的 top
+          var realTop = top - containerTop
+          // 如果元素在视口范围中，就渲染
+          if (realTop < viewHeight) {
+            img.src = img.dataset.src
+            // 已加载数量加一
+            count++
+          }
+        }
+      }
+    }
+
+    function addImgToDom (parent) {
+      var fragment = document.createDocumentFragment()
+      for (var i = 1; i <= 50; i++) {
+        var box = document.createElement('div')
+        box.className = 'img-box'
+        var img = document.createElement('img')
+        img.dataset.src = 'D:/My/bgImg/' + i + '.jpg'
+        img.alt = '加载中'
+        box.appendChild(img)
+        fragment.appendChild(box)
+      }
+      parent.appendChild(fragment)
+    }
+  </script>
+</body>
+</html>

@@ -24,7 +24,9 @@ const methodsToPatch = [
 methodsToPatch.forEach(function (method) {
   // cache original method
   const original = arrayProto[method]
+  // 会重新定义 arrayMethods 里面的每一个数组操作
   def(arrayMethods, method, function mutator (...args) {
+    // 调用原生数组的方法
     const result = original.apply(this, args)
     const ob = this.__ob__
     let inserted
@@ -39,6 +41,7 @@ methodsToPatch.forEach(function (method) {
     }
     if (inserted) ob.observeArray(inserted)
     // notify change
+    // 触发更新
     ob.dep.notify()
     return result
   })

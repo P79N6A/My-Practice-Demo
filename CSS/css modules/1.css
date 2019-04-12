@@ -1,0 +1,11 @@
+.test {
+  color: blue;
+}
+
+:global(#haha) {
+  color: red;
+}
+
+.div {
+  color: pink;
+}

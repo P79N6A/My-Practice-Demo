@@ -1,0 +1,10 @@
+let input = document.getElementById('input')
+    let btn = document.getElementById('btn')
+    let p = document.getElementById('p')
+    let searchText = document.getElementById('search-text')
+    btn.onclick = function () {
+      // history.pushState('', '', `?name=${input.value}`)
+      // let text = location.search.slice(1).split('=')[1]
+      console.log(input.value)
+      p.innerHTML = input.value
+    }

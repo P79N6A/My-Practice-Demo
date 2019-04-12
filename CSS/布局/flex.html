@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>flex</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .container {
+      display: flex;
+      height: 500px;
+      flex-wrap: wrap;
+      width: 350px;
+      justify-content: center;
+      align-items: stretch;
+      align-content: flex-start;
+      /* flex-direction: column; */
+    }
+    .container > div {
+      width: 100px;
+      background: pink;
+    }
+
+    .inline-flex-container {
+      display: inline-flex;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+  </div>
+
+  <!-- <div class="inline-flex-container">
+    <span>1</span>
+    <span>2</span>
+    <span>3</span>
+    <span>4</span>
+  </div> -->
+</body>
+</html>

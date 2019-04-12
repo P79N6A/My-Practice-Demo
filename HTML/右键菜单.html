@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>右键菜单</title>
+  <style>
+    .context-menu {
+      position: absolute;
+      width: 100px;
+      height: 300px;
+      border: 1px solid black;
+      visibility: hidden;
+      display: flex;
+      flex-flow: column nowrap;
+    }
+    .context-menu div {
+      flex: 1 1 100px;
+      list-style: none;
+      line-height: 100px;
+    }
+    .context-menu div:hover {
+      background: lightpink;
+    }
+  </style>
+</head>
+<body>
+  <ul class="context-menu">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+  </ul>
+  <script>
+    var contextMenu = document.getElementsByClassName('context-menu')[0]
+    window.oncontextmenu = function (e) {
+      console.log(e)
+      e.preventDefault()
+
+      // 创建
+      contextMenu.style.top = e.clientY + 'px'
+      contextMenu.style.left = e.clientX + 'px'
+      contextMenu.style.visibility = 'visible'
+    }
+    window.onclick = function (e) {
+      contextMenu.style.visibility = 'hidden'
+    }
+  </script>
+</body>
+</html>

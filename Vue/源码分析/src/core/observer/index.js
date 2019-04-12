@@ -52,8 +52,8 @@ export class Observer {
       // 如果存在 __proto__ 属性
       // 会给设置数组的原型 value.__proto = arrayMethods
       // 而 arrayMethods.__proto == Array.prototype
-      // 说白了就是让这个数组可以获得原生数组的方法
-      // 如果不存在 __proto__，就把原生数组的方法拷贝到 value 上
+      // 通过调用 arrayMethods 来触发更新
+      // 如果不存在 __proto__，就把 arrayMethods 的方法拷贝到 value 上
       if (hasProto) {
         protoAugment(value, arrayMethods)
       } else {

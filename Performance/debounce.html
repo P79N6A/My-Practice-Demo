@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>防抖节流</title>
+  <style>
+    
+  </style>
+</head>
+<body>
+  <script>
+    window.onload = function () {
+      // function throttle (fn, delay) {
+      //   // 上一次调用函数的时候
+      //   let last = 0
+      //   return function () {
+      //     // 保存 this
+      //     const ctx = this
+      //     // 保存参数
+      //     const args = arguments
+      //     // 记录当前时间
+      //     const now = +new Date()
+      //     // 判断
+      //     if (now - last >= delay) {
+      //       fn.apply(ctx, args)
+      //       last = now
+      //     }
+      //   }
+      // }
+
+      // function throttle (fn, delay = 500) {
+      //   // 定时器
+      //   let timer
+      //   return function () {
+      //     const ctx = this
+      //     const args = arguments
+      //     // 如果定时器还在，就放弃本次调用
+      //     if (timer) {
+      //       return
+      //     }
+      //     timer = setTimeout(() => {
+      //       clearTimeout(timer)
+      //       timer = null
+      //       fn.apply(ctx, args)
+      //     }, delay)
+      //   }
+      // }
+      // var throttleFunction = throttle(function () {
+      //   console.log('haha')
+      // }, 1000)
+      // window.addEventListener('click', throttleFunction)
+
+
+      // 防抖
+      function debounce (fn, delay) {
+        // 定时器
+        let timer
+        return function () {
+          const ctx = this
+          const args = arguments
+          // 每次触发都要先取消原来的计时器，重新设置
+          if (timer) {
+            clearTimeout(timer)
+          }
+          timer = setTimeout(() => {
+            timer = null
+            fn.apply(ctx, args)
+          }, delay)
+        }
+      }
+
+      // function throttle (fn, delay) {
+      //   let timer
+      //   let last = 0
+      //   return function () {
+      //     const ctx = this
+      //     const args = arguments
+      //     const now = +new Date()
+
+      //     // 如果大于我们的预设时间，就不管怎么样都会执行一次
+      //     if (now - last >= delay) {
+      //       last = now
+      //       fn.apply(ctx, args)
+      //     } else {
+      //       // 原来防抖的逻辑
+      //       if (timer) {
+      //         clearTimeout(timer)
+      //       }
+      //       timer = setTimeout(() => {
+      //         timer = null
+      //         fn.apply(ctx, args)
+      //       }, delay)
+      //     }
+      //   }
+      // }
+
+      function debounce (fn, delay, immediate = true) {
+        let timer
+        return function () {
+          const ctx = this
+          const args = arguments
+          if (timer) {
+            clearTimeout(timer)
+          }
+          // 是否立刻调用，考虑的是，在没有定时器的情况下立刻调用
+          // 有定时器的话就重置
+          if (immediate) {
+            if (!timer) {
+              fn.apply(ctx, args)
+              // 因为之前调用过了，所以就要修改 timer
+              // 避免一直都是立刻调用
+              timer = setTimeout(() => {}, delay)
+            } else {
+              timer = setTimeout(() => {
+                timer = null
+                fn.apply(ctx, args)
+              }, delay)
+            }
+          } else {
+            timer = setTimeout(() => {
+              fn.apply(ctx, args)
+            }, delay)
+          }
+        }
+      }
+      var debounceFunction = debounce(function () {
+        console.log('debounce')
+      }, 1000)
+      window.addEventListener('click', debounceFunction)
+    }
+  </script>
+</body>
+</html>

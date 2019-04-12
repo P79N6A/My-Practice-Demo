@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[1],{"./src/2.css":function(s,c,o){},"./src/other.js":function(s,c,o){"use strict";o.r(c);o("./src/2.css");console.log("aaa1212"),c.default={}}}]);
