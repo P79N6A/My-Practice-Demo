@@ -1,6 +1,4 @@
-var arr = []
-arr['b'] = 10
-console.log(arr.length) // 0
-
-var obj = {}
-obj.a = 100
+function reverse (pHead) {
+  var head = reverse(pHead)
+  head.next = pHead
+}

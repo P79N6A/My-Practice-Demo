@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>stream</title>
+</head>
+<body>
+  <!-- <iframe src="http://localhost:9955"></iframe> -->
+  <script>
+    // var ifr = document.createElement('iframe')
+    // ifr.src = 'http://localhost:9955'
+    // document.body.appendChild(ifr)
+
+    // console.log(ifr.readyState)
+
+    var xhr = new XMLHttpRequest()
+    xhr.open('get', 'http://localhost:9955')
+    xhr.send()
+    xhr.onreadystatechange = function () {
+      console.log('?')
+      if (xhr.readyState == 3) {
+        console.log(xhr.response)
+      }
+      console.log(xhr.readyState)
+    }
+  </script>
+</body>
+</html>

@@ -1,11 +1,8 @@
-function functions(flag) {
-  if (flag) {
-    function getValue() { return 'a'; }
-  } else {
-    function getValue() { return 'b'; }
-  }
+var str = '(A(B)(C(D)(E))F)'
 
-  return getValue;
+function getContent (str, n) {
+  // 要判断参数合理性
+  if (str.length < n) return
+
+  
 }
-
-console.log(functions(true))
