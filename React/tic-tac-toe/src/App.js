@@ -7,61 +7,86 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      player: 'X',
-      squares: [],
-      winner: null
+      history: [{
+        squares: new Array(9).fill(null),
+      }],
+      xIsNext: true,
+      stepNumber: 0
     }
-    this.changePlayer = this.changePlayer.bind(this)
-    this.changeSquares = this.changeSquares.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
-  changePlayer () {
-    const player = this.state.player === 'X' ? 'O' : 'X'
-    this.setState({
-      player
-    })
-  }
-  changeSquares (index) {
-    if (this.hasWinner()) {
-      return
+  handleClick (index) {
+    let history = this.state.history.slice(0, this.state.stepNumber + 1)
+    let current = history[history.length-1]
+    let squares = current.squares.slice()
+    if (!squares[index] && !this.getWinner()) {
+      squares[index] = this.state.xIsNext ? 'X' : 'O'
+      this.setState({
+        history: history.concat({
+          squares
+        }),
+        xIsNext: !this.state.xIsNext,
+        stepNumber: history.length
+      })
     }
-    let squares = this.state.squares
-    squares[index] = this.state.player
+  }
+  
+  jumpTo (step) {
     this.setState({
-      squares
+      stepNumber: step,
+      xIsNext: step % 2 ? false : true
     })
   }
 
-  hasWinner () {
-    let squares = this.state.squares
-    if (this.state.winner) {
-      return
-    }
-    if (
-        (squares[0] != undefined && squares[0] === squares[1] && squares[0] === squares[2])
-        || (squares[3] != undefined && squares[3] === squares[4] && squares[3] === squares[5])
-        || (squares[6] != undefined && squares[6] === squares[7] && squares[6] === squares[8])
-        || (squares[0] != undefined && squares[0] === squares[3] && squares[0] === squares[6])
-        || (squares[1] != undefined && squares[1] === squares[4] && squares[1] === squares[7])
-        || (squares[2] != undefined && squares[2] === squares[5] && squares[2] === squares[8])
-        || (squares[0] != undefined && squares[0] === squares[4] && squares[0] === squares[8])
-        || (squares[2] != undefined && squares[2] === squares[4] && squares[2] === squares[6])
-    ) {
-      this.setState({
-        winner: this.state.player
-      })
-      console.log('??')
-      return true
-    } else {
-      return false
-    }
-  }
   render() {
+    let next = null
+    let history = this.state.history
+    let current = history[this.state.stepNumber]
+    let winner = this.getWinner()
+    if (winner) {
+      next = `winner: ${winner}`
+    } else {
+      next = `next player: ${this.state.xIsNext ? 'X' : 'O'}`
+    }
+
+    let btns = history.map((item, index) => {
+      if (index === 0) {
+        return  <li key={index} onClick={() => this.jumpTo(index)}><button>game start</button></li>
+      }
+      return <li key={index} onClick={() => this.jumpTo(index)}><button>move to step {index+1}</button></li>
+    })
+
     return (
       <div>
-        <Board {...this.state} changePlayer={this.changePlayer} changeSquares={this.changeSquares}></Board>
-        <Record {...this.state}></Record>
+        <Board squares={current.squares} onClick={this.handleClick}></Board>
+        {/* <Record></Record> */}
+        <div>
+          {next}
+          <ol>{btns}</ol>
+        </div>
       </div>
     );
+  }
+  getWinner () {
+    let lines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6]
+    ]
+    let history = this.state.history
+    let squares = history[this.state.stepNumber].squares
+    for (let i = 0; i < lines.length; i++) {
+      let [a, b, c] = lines[i]
+      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+        return squares[a]
+      }
+    }
+    return false
   }
 }
 

@@ -1,38 +1,34 @@
 import React from 'react'
-import Square from '../square/Square'
+import Square from '../Square/Square'
 import './Board.css'
 
 class Board extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {
-      squares: []
-    }
-    this.handleClick = this.handleClick.bind(this)
+    this.renderSquare = this.renderSquare.bind(this)
   }
-
-  handleClick (index) {
-    this.props.changePlayer()
-    this.props.changeSquares(index)
+  renderSquare (index) {
+    return (
+      <Square value={this.props.squares[index]} onClick={this.props.onClick} index={index}></Square>
+    )
   }
-
   render () {
     return (
       <div className="board">
         <div className="board-row">
-          <Square value={this.props.squares[0]} index="0" onClick={this.handleClick}></Square>
-          <Square value={this.props.squares[1]}  index="1" onClick={this.handleClick}></Square>
-          <Square value={this.props.squares[2]}  index="2" onClick={this.handleClick}></Square>
+          {this.renderSquare(0)}
+          {this.renderSquare(1)}
+          {this.renderSquare(2)}
         </div>
         <div className="board-row">
-          <Square value={this.props.squares[3]}  index="3" onClick={this.handleClick}></Square>
-          <Square value={this.props.squares[4]}  index="4" onClick={this.handleClick}></Square>
-          <Square value={this.props.squares[5]}  index="5" onClick={this.handleClick}></Square>
+          {this.renderSquare(3)}
+          {this.renderSquare(4)}
+          {this.renderSquare(5)}
         </div>
         <div className="board-row">
-          <Square value={this.props.squares[6]}  index="6" onClick={this.handleClick}></Square>
-          <Square value={this.props.squares[7]}  index="7" onClick={this.handleClick}></Square>
-          <Square value={this.props.squares[8]}  index="8" onClick={this.handleClick}></Square>
+          {this.renderSquare(6)}
+          {this.renderSquare(7)}
+          {this.renderSquare(8)}
         </div>
       </div>
     )
