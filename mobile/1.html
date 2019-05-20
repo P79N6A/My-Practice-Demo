@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script>
+    // 设置 1rem = 布局宽度 / 10
+    let docEl = document.documentElement
+    docEl.style.fontSize = docEl.clientWidth / 10 + 'px'
+
+    window.addEventListener('orientationchange', e => {
+      console.log(e);
+    })
+    </script>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+      .test {
+        border: 1px solid black;
+        width: calc(10rem - 1px * 2);
+        height: 2rem;
+        font-size: .8rem;
+        background: lightblue;
+      }
+      .img-box {
+        width: 499px; height: 598px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="test">再见,,</div>
+    <div class="img-box">
+      <img src="./1.jpg" style="height: 100%; width: 100%;" />
+    </div>
+  </body>
+</html>

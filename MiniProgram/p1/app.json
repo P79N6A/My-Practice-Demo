@@ -1,0 +1,13 @@
+{
+  "pages": [
+    "pages/imageCropper/imageCropper"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "debug": true
+}

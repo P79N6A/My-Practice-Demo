@@ -1,0 +1,12 @@
+<view>
+ test1:
+  {{test.a}}
+  test2:
+  {{test.a + '' }}
+  test3:
+  {{ 1 ? test.a : 2}}
+  test4:
+  {{ 1 ? test.a + '' : 2}}
+
+  <!-- {{ 1 ? test.a + '' : 2}} -->
+</view>

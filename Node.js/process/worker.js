@@ -1,0 +1,1 @@
+console.log('worker ', Math.random())

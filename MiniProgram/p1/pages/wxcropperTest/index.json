@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "my-cropper": "../../components/wx-cropper/index"
+  }
+}

@@ -1,0 +1,4 @@
+<view class="component-wrapper">
+  <my-component header-text="My Title"></my-component>
+  <view class="hello">hello</view>
+</view>
