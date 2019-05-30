@@ -1,8 +1,0 @@
-{
-  "pages": [
-    "pages/test/test",
-    "pages/index/index"
-  ],
-  "debug": true,
-  "sitemapLocation": "sitemap.json"
-}
