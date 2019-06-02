@@ -1,22 +1,49 @@
-const log4js = require('log4js');
+// const log4js = require('log4js');
+
+// // log4js.configure({
+// //   appenders: {
+// //     cheese: {
+// //       type: 'file',
+// //       filename: 'cheese.log',
+// //     }
+// //   },
+// //   categories: {
+// //     default: {
+// //       appenders: ['cheese'],
+// //       level: 'error',
+// //     }
+// //   }
+// // });
+
+// // const loggerTest = log4js.getLogger('cheese');
+// const loggerTest = log4js.getLogger();
+
+// // module.exports = {
+// //   loggerTest,
+// // }
+// loggerTest.debug('test');
+
+var log4js = require('log4js');
 
 log4js.configure({
   appenders: {
-    cheese: {
+    test: {
       type: 'file',
-      filename: 'cheese.log',
+      filename: 'test.log'
     }
   },
   categories: {
     default: {
-      appenders: ['cheese'],
+      appenders: ['test'],
       level: 'error',
+    },
+    ttt: {
+      appenders: ['test'],
+      level: 'debug',
     }
   }
 });
 
-const loggerTest = log4js.getLogger('cheese');
+var logger = log4js.getLogger('ttt');
 
-module.exports = {
-  loggerTest,
-}
+logger.fatal("Time:", new Date());

@@ -134,7 +134,7 @@ const deleteArticleController = async (ctx) => {
       code: 200,
     });
   } else {
-    responseWith404(ctx, '删除失败，文章不存在');
+    responseWith404(ctx, '删除失败，文章不存在');{}
   }
 }
 
